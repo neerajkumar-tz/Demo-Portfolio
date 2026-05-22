@@ -120,7 +120,7 @@ const posts = [
     ],
   },
   {
-    title: 'How I Grew a Brand's Instagram From 2K to 200K in 18 Months',
+    title: "How I Grew a Brand's Instagram From 2K to 200K in 18 Months",
     slug: 'instagram-growth-case-study',
     excerpt:
       'A behind-the-scenes look at the content strategy, posting cadence, and community tactics that drove 100x follower growth for a lifestyle brand.',
