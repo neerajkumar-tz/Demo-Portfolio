@@ -1,0 +1,27 @@
+import './globals.css';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
+export const metadata = {
+  title: { default: 'Alex Rivera — Digital Marketing Strategist', template: '%s | Alex Rivera' },
+  description:
+    'Award-winning digital marketing strategist helping ambitious brands grow through data-driven SEO, paid media, content, and analytics.',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://alexrivera.marketing',
+    siteName: 'Alex Rivera',
+  },
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
