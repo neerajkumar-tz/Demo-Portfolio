@@ -1,26 +1,18 @@
 import '../globals.css';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { Syne, DM_Serif_Display, DM_Sans } from 'next/font/google';
+import { Lora, Inter } from 'next/font/google';
 
-const syne = Syne({
+const lora = Lora({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
-  variable: '--font-ui',
-  display: 'swap',
-});
-
-const dmSerif = DM_Serif_Display({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-display',
   display: 'swap',
 });
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
+  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-sans',
   display: 'swap',
 });
@@ -39,7 +31,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${syne.variable} ${dmSerif.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${lora.variable} ${inter.variable}`}>
       <body>
         <div className="ambient-glow">
           <div className="orb orb-1"></div>
