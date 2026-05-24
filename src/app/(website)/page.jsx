@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import BlogCard from '../../components/BlogCard';
 import { getRecentPosts } from '../../lib/sanity';
+import InteractiveHero from '../../components/InteractiveHero';
 
 const MARQUEE_ITEMS = [
   'Search Optimisation', 'Paid Ads & PPC', 'Content Funnels', 'Growth Analytics',
@@ -97,106 +98,10 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ── Hero Section ────────────────────────────────────────── */}
-      <section className="hero">
-        <div className="hero-bg" />
-        <div className="hero-grid-line" />
+      {/* ── Interactive 3D Hero Section ────────────────────────── */}
+      <InteractiveHero />
 
-        <div className="container">
-          <div className="hero-content">
-            <div className="hero-eyebrow animate-fade-up">
-              <span className="hero-eyebrow-line" />
-              <span className="label">Growth Strategy &amp; Performance</span>
-              <span className="hero-eyebrow-line" />
-            </div>
 
-            <h1 className="hero-title animate-fade-up delay-1">
-              Marketing that <em>scales</em><br />bottom line revenue.
-            </h1>
-
-            <p className="hero-subtitle animate-fade-up delay-2">
-              Fractional growth director and strategist helping ambitious product brands grow
-              through structured SEO, analytical performance-attribution, and high-converting funnel design.
-            </p>
-
-            <div className="hero-actions animate-fade-up delay-3">
-              <Link href="/#contact" className="btn-primary">
-                Acquisition Blueprint →
-              </Link>
-              <Link href="/blog" className="btn-secondary">
-                Explore Playbooks
-              </Link>
-            </div>
-            
-            {/* Interactive Motion Graphic: Blueprint SVG */}
-            <div className="animate-fade-up delay-4" style={{ 
-              marginTop: '64px',
-              border: '1px dashed var(--border-strong)', 
-              borderRadius: 'var(--radius-md)', 
-              padding: '24px',
-              background: 'rgba(255, 255, 255, 0.01)',
-              position: 'relative'
-            }}>
-              <span className="stitch-corner-tl">+</span>
-              <span className="stitch-corner-tr">+</span>
-              <span className="stitch-corner-bl">+</span>
-              <span className="stitch-corner-br">+</span>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px dashed var(--border)', paddingBottom: '12px', marginBottom: '16px' }}>
-                <span style={{ fontSize: '11px', fontFamily: 'var(--font-ui)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Marketing Pipeline Attribution.sys</span>
-                <div style={{ display: 'flex', gap: '6px' }}>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ef4444' }}></span>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#fbbf24' }}></span>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e' }}></span>
-                </div>
-              </div>
-              <svg viewBox="0 0 800 240" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto', maxHeight: '180px' }}>
-                {/* Dotted Grid lines */}
-                <line x1="50" y1="20" x2="750" y2="20" stroke="var(--border)" strokeDasharray="3 6" />
-                <line x1="50" y1="80" x2="750" y2="80" stroke="var(--border)" strokeDasharray="3 6" />
-                <line x1="50" y1="140" x2="750" y2="140" stroke="var(--border)" strokeDasharray="3 6" />
-                <line x1="50" y1="200" x2="750" y2="200" stroke="var(--border)" strokeDasharray="3 6" />
-                
-                {/* Vertical blueprint boundaries */}
-                <line x1="200" y1="0" x2="200" y2="240" stroke="var(--border)" strokeDasharray="2 4" />
-                <line x1="400" y1="0" x2="400" y2="240" stroke="var(--border)" strokeDasharray="2 4" />
-                <line x1="600" y1="0" x2="600" y2="240" stroke="var(--border)" strokeDasharray="2 4" />
-                
-                {/* Interactive Curve Paths */}
-                <path d="M 80,140 Q 200,60 320,110 T 560,180 T 720,50" stroke="var(--accent)" strokeWidth="3" strokeLinecap="round" strokeDasharray="1000" strokeDashoffset="0">
-                  <animate attributeName="stroke-dashoffset" values="1000;0" dur="4s" repeatCount="1" />
-                </path>
-                <path d="M 80,140 Q 200,60 320,110 T 560,180 T 720,50" stroke="var(--accent)" strokeWidth="8" strokeLinecap="round" opacity="0.15" />
-                
-                <path d="M 80,160 Q 200,100 320,160 T 560,90 T 720,110" stroke="var(--accent-secondary)" strokeWidth="2" strokeLinecap="round" opacity="0.5" />
-                
-                {/* Nodes & Data Dots */}
-                <circle cx="80" cy="140" r="5" fill="#fff" stroke="var(--accent)" strokeWidth="2" />
-                <circle cx="270" cy="95" r="5" fill="#fff" stroke="var(--accent)" strokeWidth="2" />
-                <circle cx="480" cy="145" r="5" fill="#fff" stroke="var(--accent)" strokeWidth="2" />
-                <circle cx="720" cy="50" r="6" fill="#fff" stroke="var(--accent)" strokeWidth="3">
-                  <animate attributeName="r" values="6;9;6" dur="2s" repeatCount="indefinite" />
-                </circle>
-                
-                {/* Labels */}
-                <text x="80" y="225" fill="var(--text-muted)" fontSize="10" fontFamily="var(--font-ui)" letterSpacing="0.1em" textAnchor="middle">ACQUISITION</text>
-                <text x="280" y="225" fill="var(--text-muted)" fontSize="10" fontFamily="var(--font-ui)" letterSpacing="0.1em" textAnchor="middle">ENGAGEMENT</text>
-                <text x="480" y="225" fill="var(--text-muted)" fontSize="10" fontFamily="var(--font-ui)" letterSpacing="0.1em" textAnchor="middle">RETENTION</text>
-                <text x="680" y="225" fill="var(--accent)" fontSize="10" fontFamily="var(--font-ui)" letterSpacing="0.1em" textAnchor="middle" fontWeight="bold">REVENUE ENGINE</text>
-                
-                {/* Real-time moving signal dots */}
-                <circle cx="0" cy="0" r="4" fill="var(--accent-secondary)">
-                  <animateMotion path="M 80,140 Q 200,60 320,110 T 560,180 T 720,50" dur="6s" repeatCount="indefinite" />
-                </circle>
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div className="hero-scroll">
-          <div className="scroll-line" />
-          <span>Scroll</span>
-        </div>
-      </section>
 
       {/* ── Marquee Section ─────────────────────────────────────── */}
       <div className="marquee-section">
@@ -247,7 +152,7 @@ export default async function HomePage() {
               <div className="about-image-frame">
                 <Image
                   src="https://picsum.photos/seed/editorial/600/800"
-                  alt="Neeraj Portrait"
+                  alt="Brandlift Portrait"
                   width={600}
                   height={800}
                   style={{ objectFit: 'cover' }}
@@ -265,9 +170,9 @@ export default async function HomePage() {
               <h2 style={{ marginTop: '16px' }}>Data-driven strategy.<br />Repeatable growth patterns.</h2>
 
               <p>
-                I am Neeraj — a digital growth consultant specializing in turning underperforming
+                Brandlift is a digital growth consultancy specializing in turning underperforming
                 funnels into highly optimized, scaling sales operations. Operating as a strategic marketing
-                director, I collaborate with founders to construct scalable distribution frameworks.
+                director, we collaborate with founders to construct scalable distribution frameworks.
               </p>
               <p>
                 My process maps SEO infrastructure, programmatic attribution, paid advertising testing cycles,

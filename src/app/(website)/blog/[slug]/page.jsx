@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
     const post = await getPostBySlug(params.slug);
     if (!post) return {};
     return {
-      title: `${post.title} | Neeraj Playbooks`,
+      title: `${post.title} | Brandlift Playbooks`,
       description: post.excerpt,
     };
   } catch {
@@ -95,7 +95,7 @@ export default async function PostPage({ params }) {
     : `https://picsum.photos/seed/${params.slug}/1400/650`;
 
   // Calculate Author details with secure fallback defaults
-  const authorName = post.authorName || 'Neeraj';
+  const authorName = post.authorName || 'Brandlift';
   const authorRole = 'Digital Marketing Director';
   const authorImageSrc = post.authorImage?.asset
     ? urlFor(post.authorImage).width(120).height(120).fit('crop').url()
@@ -119,7 +119,7 @@ export default async function PostPage({ params }) {
           <div className="container">
             {/* Wellows-style Breadcrumb line */}
             <div className="breadcrumb-line">
-              <Link href="/" className="breadcrumb-link">Neeraj</Link>
+              <Link href="/" className="breadcrumb-link">Brandlift</Link>
               <span className="breadcrumb-sep">/</span>
               <Link href="/blog" className="breadcrumb-link">Blog</Link>
               <span className="breadcrumb-sep">/</span>

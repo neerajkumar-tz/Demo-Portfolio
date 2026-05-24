@@ -17,7 +17,7 @@ export default function Header() {
         <div className="header-inner">
           <Link href="/" className="logo">
             <span className="logo-dot" />
-            Neeraj
+            Brandlift
           </Link>
 
           <nav className="nav">

@@ -1,25 +1,25 @@
 /* ── Fonts are preloaded locally via Next.js next/font/google inside layout.jsx ── */
 /* ── CSS Design System & Variables ──────────────────────────────── */
 :root {
-  --bg: #f7f7f9;
-  --bg-2: #f0f0f3;
-  --bg-3: #e4e4e9;
-  --surface: rgba(255, 255, 255, 0.75);
-  --surface-hover: rgba(255, 255, 255, 0.95);
-  --border: rgba(0, 0, 0, 0.05);
-  --border-strong: rgba(0, 0, 0, 0.12);
-  --border-stitch: rgba(0, 0, 0, 0.18);
+  --bg: #070709;
+  --bg-2: #0e0e13;
+  --bg-3: #161622;
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-hover: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --border-stitch: rgba(255, 255, 255, 0.18);
 
-  --text-primary: #121214;
-  --text-secondary: #4a4a52;
-  --text-muted: #82828b;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
 
-  --accent: #121214; /* Deep black accent for editorial contrast */
-  --accent-rgb: 18, 18, 20;
-  --accent-secondary: #2563eb; /* Clean royal blue */
-  --accent-secondary-rgb: 37, 99, 235;
-  --accent-glow: rgba(18, 18, 20, 0.05);
-  --accent-glow-sec: rgba(37, 99, 235, 0.08);
+  --accent: #ff5c35; /* Premium electric orange */
+  --accent-rgb: 255, 92, 53;
+  --accent-secondary: #3b82f6; /* Electric blue */
+  --accent-secondary-rgb: 59, 130, 246;
+  --accent-glow: rgba(255, 92, 53, 0.15);
+  --accent-glow-sec: rgba(59, 130, 246, 0.15);
 
   --font-display: var(--font-display), Georgia, serif;
   --font-sans: var(--font-sans), system-ui, sans-serif;
@@ -2463,3 +2463,153 @@ h1, h2, h3, h4 {
   width: 0%;
   transition: width 0.1s ease-out;
 }
+
+
+/* ── High-Tech Dark Glassmorphic Blueprint Override ─────────────── */
+
+/* Reset sections to translucent states */
+.section {
+  background: transparent !important;
+}
+
+#services {
+  background: rgba(14, 14, 19, 0.4) !important;
+  backdrop-filter: blur(12px);
+}
+
+/* Glassmorphic Cards & Panels override */
+.stat-card, 
+.service-card, 
+.testimonial-card, 
+.blog-card, 
+.sidebar-author-card,
+.author-card-box,
+.custom_card_author,
+.custom_section_div,
+.ai-share-buttons-container,
+.ai-trap,
+.wsc-block.wsc-definition,
+.wsc-block.wsc-stat,
+.wsc-block.wsc-checklist,
+.comparision-table-wrap {
+  background: rgba(14, 14, 19, 0.75) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  position: relative;
+}
+
+/* Elegant Hover elevations with accent borders */
+.stat-card:hover,
+.service-card:hover,
+.testimonial-card:hover,
+.blog-card:hover {
+  transform: translateY(-8px) scale(1.01) !important;
+  border-color: rgba(255, 92, 53, 0.35) !important;
+  box-shadow: 0 20px 40px rgba(255, 92, 53, 0.06), 0 30px 60px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Obsidian Navigation bar shell */
+.header {
+  background: rgba(7, 7, 9, 0.75) !important;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.header.scrolled {
+  background: rgba(7, 7, 9, 0.9) !important;
+  border-bottom: 1px solid rgba(255, 92, 53, 0.25) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Obsidian Library background overrides */
+.blog-main-content {
+  color: var(--text-primary) !important;
+}
+
+.page-hero {
+  background: #070709 !important;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08) !important;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: var(--text-secondary) !important;
+}
+
+.filter-btn:hover {
+  border-color: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+.filter-btn.active {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(255, 92, 53, 0.3) !important;
+}
+
+/* Definition lists inner labels */
+.wsc-label--light {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Wellows comparison table cells */
+.comparision-table-wrap {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.comparision-table-wrap table {
+  background: rgba(14, 14, 19, 0.75) !important;
+}
+
+.comparision-table-wrap th {
+  background: rgba(255, 255, 255, 0.02) !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.comparision-table-wrap td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+}
+
+/* FAQ Accordion Styling inside Playbook Detail view */
+.faq-section-box {
+  background: rgba(14, 14, 19, 0.75) !important;
+}
+
+/* Custom 3D Parallax Graphic styles */
+.hero {
+  background-color: #070709 !important;
+}
+
+.ambient-glow .orb {
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0.22 !important;
+}
+
+.ambient-glow .orb-2 {
+  background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%);
+}
+
+/* Lora Editorial Content elements inside dark playbooks */
+.post-container-root {
+  background-color: #070709 !important;
+  color: #f8fafc !important;
+}
+
+.post-body p {
+  color: #e2e8f0 !important;
+}
+
+.back-link-bottom {
+  color: #94a3b8 !important;
+}
+
+.back-link-bottom:hover {
+  color: var(--accent) !important;
+}
+
