@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import BlogCard from '../../components/BlogCard';
 import { getRecentPosts } from '../../lib/sanity';
 
@@ -244,10 +245,13 @@ export default async function HomePage() {
               <span className="stitch-corner-bl">+</span>
               <span className="stitch-corner-br">+</span>
               <div className="about-image-frame">
-                <img
+                <Image
                   src="https://picsum.photos/seed/editorial/600/800"
                   alt="Alex Rivera Portrait"
-                  loading="lazy"
+                  width={600}
+                  height={800}
+                  style={{ objectFit: 'cover' }}
+                  priority={false}
                 />
               </div>
               <div className="about-image-accent">

@@ -16,7 +16,7 @@
     "@sanity/table": "^2.0.1",
     "@sanity/vision": "^3.99.0",
     "dotenv": "^17.4.2",
-    "next": "^16.2.6",
+    "next": "^15.5.18",
     "next-sanity": "^9.8.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

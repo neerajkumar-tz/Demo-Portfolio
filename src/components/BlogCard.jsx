@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { urlFor } from '../lib/sanity';
 
 function formatDate(iso) {
@@ -26,7 +27,14 @@ export default function BlogCard({ post }) {
       <Link href={`/blog/${slug?.current}`}>
         <div className="blog-card-image">
           {imageUrl ? (
-            <img src={imageUrl} alt={title} loading="lazy" />
+            <Image 
+              src={imageUrl} 
+              alt={title} 
+              width={800} 
+              height={500} 
+              style={{ objectFit: 'cover' }}
+              loading="lazy"
+            />
           ) : (
             <div className="img-placeholder">✦</div>
           )}

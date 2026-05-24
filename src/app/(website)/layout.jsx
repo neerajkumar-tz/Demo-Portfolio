@@ -1,6 +1,29 @@
 import '../globals.css';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { Syne, DM_Serif_Display, DM_Sans } from 'next/font/google';
+
+const syne = Syne({
+  subsets: ['latin'],
+  weight: ['400', '600', '700', '800'],
+  variable: '--font-ui',
+  display: 'swap',
+});
+
+const dmSerif = DM_Serif_Display({
+  subsets: ['latin'],
+  weight: ['400'],
+  style: ['normal', 'italic'],
+  variable: '--font-display',
+  display: 'swap',
+});
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-sans',
+  display: 'swap',
+});
 
 export const metadata = {
   title: { default: 'Alex Rivera — Digital Marketing Strategist', template: '%s | Alex Rivera' },
@@ -16,7 +39,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${syne.variable} ${dmSerif.variable} ${dmSans.variable}`}>
       <body>
         <div className="ambient-glow">
           <div className="orb orb-1"></div>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
 import { getPostBySlug, getAllPostSlugs, urlFor } from '../../../../lib/sanity';
 import { notFound } from 'next/navigation';
@@ -131,10 +132,14 @@ export default async function PostPage({ params }) {
           <span className="stitch-corner-tr">+</span>
           <span className="stitch-corner-bl">+</span>
           <span className="stitch-corner-br">+</span>
-          <img
+          <Image
             src={coverSrc}
             alt={post.coverImage?.alt || post.title}
+            width={1400}
+            height={650}
             className="post-cover"
+            style={{ objectFit: 'cover' }}
+            priority={true}
           />
         </div>
 
