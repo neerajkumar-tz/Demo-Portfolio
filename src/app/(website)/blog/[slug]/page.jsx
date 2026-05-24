@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
-import { getPostBySlug, getAllPostSlugs, urlFor } from '../../../lib/sanity';
+import { getPostBySlug, getAllPostSlugs, urlFor } from '../../../../lib/sanity';
 import { notFound } from 'next/navigation';
+import ProgressBar from '../../../../components/ProgressBar';
 
 export const revalidate = 60;
 
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }) {
     const post = await getPostBySlug(params.slug);
     if (!post) return {};
     return {
-      title: post.title,
+      title: `${post.title} | Alex Rivera Playbooks`,
       description: post.excerpt,
     };
   } catch {
@@ -50,21 +51,27 @@ const ptComponents = {
   },
   types: {
     image: ({ value }) => {
-      const src = value?.asset ? urlFor(value).width(1000).url() : null;
+      const src = value?.asset ? urlFor(value).width(1200).url() : null;
       return src ? (
-        <figure style={{ margin: '40px 0' }}>
+        <figure style={{ margin: '48px 0', border: '1px dashed var(--border-strong)', padding: '8px', borderRadius: 'var(--radius-md)', background: 'var(--bg-2)', position: 'relative' }}>
+          <span className="stitch-corner-tl">+</span>
+          <span className="stitch-corner-tr">+</span>
+          <span className="stitch-corner-bl">+</span>
+          <span className="stitch-corner-br">+</span>
           <img
             src={src}
-            alt={value?.alt || ''}
-            style={{ width: '100%', borderRadius: 'var(--radius-md)' }}
+            alt={value?.alt || 'Article Graphic'}
+            style={{ width: '100%', borderRadius: 'var(--radius)', display: 'block' }}
           />
           {value?.alt && (
             <figcaption style={{
               textAlign: 'center',
-              fontSize: '13px',
+              fontSize: '12px',
               color: 'var(--text-muted)',
-              marginTop: '10px',
+              marginTop: '12px',
               fontFamily: 'var(--font-ui)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em'
             }}>
               {value.alt}
             </figcaption>
@@ -86,27 +93,30 @@ export default async function PostPage({ params }) {
   if (!post) notFound();
 
   const coverSrc = post.coverImage?.asset
-    ? urlFor(post.coverImage).width(1400).height(600).fit('crop').url()
-    : `https://picsum.photos/seed/${params.slug}/1400/600`;
+    ? urlFor(post.coverImage).width(1400).height(650).fit('crop').url()
+    : `https://picsum.photos/seed/${params.slug}/1400/650`;
 
   return (
     <>
-      <article>
+      {/* Dynamic Scroll Reading Progress bar */}
+      <ProgressBar />
+
+      <article style={{ position: 'relative', zIndex: 2 }}>
         <div className="post-hero">
           <div className="container">
             <Link href="/blog" className="back-link">
-              ← Back to Blog
+              ← Return to Library
             </Link>
 
-            <div className="post-meta-bar">
+            <div className="post-meta-bar" style={{ marginTop: '16px' }}>
               {post.category && <span className="post-cat">{post.category}</span>}
               {post.publishedAt && (
                 <span className="post-date">{formatDate(post.publishedAt)}</span>
               )}
               {post.readTime && (
                 <>
-                  <span className="post-date" style={{ opacity: 0.4 }}>·</span>
-                  <span className="post-time">{post.readTime} min read</span>
+                  <span className="post-date" style={{ opacity: 0.3 }}>·</span>
+                  <span className="post-time">{post.readTime} min playbook reading</span>
                 </>
               )}
             </div>
@@ -116,7 +126,11 @@ export default async function PostPage({ params }) {
           </div>
         </div>
 
-        <div className="container">
+        <div className="container" style={{ position: 'relative' }}>
+          <span className="stitch-corner-tl">+</span>
+          <span className="stitch-corner-tr">+</span>
+          <span className="stitch-corner-bl">+</span>
+          <span className="stitch-corner-br">+</span>
           <img
             src={coverSrc}
             alt={post.coverImage?.alt || post.title}
@@ -130,22 +144,25 @@ export default async function PostPage({ params }) {
               <PortableText value={post.body} components={ptComponents} />
             ) : (
               <p style={{ color: 'var(--text-muted)', textAlign: 'center' }}>
-                No content yet.
+                This playbook does not contain text sections yet.
               </p>
             )}
 
             <div style={{
-              marginTop: '64px',
+              marginTop: '80px',
               paddingTop: '40px',
-              borderTop: '1px solid var(--border)',
+              borderTop: '1px dashed var(--border-strong)',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
               flexWrap: 'wrap',
-              gap: '16px',
+              gap: '24px',
+              position: 'relative'
             }}>
+              <span className="stitch-corner-tl">+</span>
+              <span className="stitch-corner-tr">+</span>
               <Link href="/blog" className="back-link" style={{ marginBottom: 0 }}>
-                ← All Posts
+                ← Library Catalog
               </Link>
               <a
                 href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}`}
@@ -153,14 +170,17 @@ export default async function PostPage({ params }) {
                 rel="noopener noreferrer"
                 style={{
                   fontFamily: 'var(--font-ui)',
-                  fontSize: '12px',
-                  fontWeight: '600',
-                  letterSpacing: '0.08em',
+                  fontSize: '11px',
+                  fontWeight: '700',
+                  letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   color: 'var(--accent)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px'
                 }}
               >
-                Share on X →
+                Share Strategy Playbook <span style={{ fontSize: '10px' }}>↗</span>
               </a>
             </div>
           </div>

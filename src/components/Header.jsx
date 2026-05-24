@@ -21,14 +21,14 @@ export default function Header() {
           </Link>
 
           <nav className="nav">
-            <Link href="/#about"    className="nav-link">About</Link>
+            <Link href="/#about" className="nav-link">About</Link>
             <Link href="/#services" className="nav-link">Services</Link>
-            <Link href="/blog"      className="nav-link">Blog</Link>
-            <Link href="/#contact"  className="nav-link">Contact</Link>
+            <Link href="/blog" className="nav-link">Blog</Link>
+            <Link href="/#contact" className="nav-link">Contact</Link>
           </nav>
 
           <Link href="/#contact" className="nav-cta">
-            Work With Me
+            Let's Talk
           </Link>
         </div>
       </div>

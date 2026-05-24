@@ -1,6 +1,6 @@
-import './globals.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import '../globals.css';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 export const metadata = {
   title: { default: 'Alex Rivera — Digital Marketing Strategist', template: '%s | Alex Rivera' },
@@ -18,6 +18,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <div className="ambient-glow">
+          <div className="orb orb-1"></div>
+          <div className="orb orb-2"></div>
+          <div className="orb orb-3"></div>
+        </div>
         <Header />
         <main>{children}</main>
         <Footer />
