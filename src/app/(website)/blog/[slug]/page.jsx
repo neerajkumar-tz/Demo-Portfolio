@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
-import { getPostBySlug, getAllPostSlugs, urlFor } from '../../../../lib/sanity';
+import { getPostBySlug, getRecentPosts, getAllPostSlugs, urlFor } from '../../../../lib/sanity';
 import { notFound } from 'next/navigation';
 import ProgressBar from '../../../../components/ProgressBar';
 import FaqSection from '../../../../components/FaqSection';
+import TableOfContents from '../../../../components/TableOfContents';
 
 export const revalidate = 60;
 
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }) {
     const post = await getPostBySlug(params.slug);
     if (!post) return {};
     return {
-      title: `${post.title} | Alex Rivera Playbooks`,
+      title: `${post.title} | Neeraj Playbooks`,
       description: post.excerpt,
     };
   } catch {
@@ -55,26 +56,18 @@ const ptComponents = {
     image: ({ value }) => {
       const src = value?.asset ? urlFor(value).width(1200).url() : null;
       return src ? (
-        <figure style={{ margin: '48px 0', border: '1px dashed var(--border-strong)', padding: '8px', borderRadius: 'var(--radius-md)', background: 'var(--bg-2)', position: 'relative' }}>
+        <figure className="figure-stitched">
           <span className="stitch-corner-tl">+</span>
           <span className="stitch-corner-tr">+</span>
           <span className="stitch-corner-bl">+</span>
           <span className="stitch-corner-br">+</span>
           <img
             src={src}
-            alt={value?.alt || 'Article Graphic'}
-            style={{ width: '100%', borderRadius: 'var(--radius)', display: 'block' }}
+            alt={value?.alt || 'Strategy Blueprint Graphic'}
+            className="figure-stitched-image"
           />
           {value?.alt && (
-            <figcaption style={{
-              textAlign: 'center',
-              fontSize: '12px',
-              color: 'var(--text-muted)',
-              marginTop: '12px',
-              fontFamily: 'var(--font-sans)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em'
-            }}>
+            <figcaption className="figure-stitched-caption">
               {value.alt}
             </figcaption>
           )}
@@ -86,8 +79,11 @@ const ptComponents = {
 
 export default async function PostPage({ params }) {
   let post = null;
+  let recentPosts = [];
+  
   try {
     post = await getPostBySlug(params.slug);
+    recentPosts = await getRecentPosts(5);
   } catch (e) {
     notFound();
   }
@@ -99,158 +95,586 @@ export default async function PostPage({ params }) {
     : `https://picsum.photos/seed/${params.slug}/1400/650`;
 
   // Calculate Author details with secure fallback defaults
-  const authorName = post.authorName || 'Alex Rivera';
+  const authorName = post.authorName || 'Neeraj';
+  const authorRole = 'Digital Marketing Director';
   const authorImageSrc = post.authorImage?.asset
     ? urlFor(post.authorImage).width(120).height(120).fit('crop').url()
     : `https://picsum.photos/seed/${encodeURIComponent(authorName)}/120/120`;
+
+  const shareUrl = `https://sanitytz.vercel.app/blog/${params.slug}`;
+
+  // Filter out the current post from recent posts to avoid duplicate listings
+  const filteredRecentPosts = recentPosts
+    .filter(rp => rp._id !== post._id)
+    .slice(0, 4);
 
   return (
     <>
       {/* Dynamic Scroll Reading Progress bar */}
       <ProgressBar />
 
-      <article style={{ position: 'relative', zIndex: 2 }}>
-        <div className="post-hero">
+      <article className="post-container-root">
+        {/* BLOG POST HERO SECTION */}
+        <section className="blog-post-hero">
           <div className="container">
-            <Link href="/blog" className="back-link">
-              ← Return to Library
-            </Link>
-
-            <div style={{ marginTop: '24px' }}>
-              {post.category && (
-                <span className="post-cat" style={{ marginBottom: '20px', display: 'inline-block' }}>
-                  {post.category}
-                </span>
-              )}
+            {/* Wellows-style Breadcrumb line */}
+            <div className="breadcrumb-line">
+              <Link href="/" className="breadcrumb-link">Neeraj</Link>
+              <span className="breadcrumb-sep">/</span>
+              <Link href="/blog" className="breadcrumb-link">Blog</Link>
+              <span className="breadcrumb-sep">/</span>
+              <span className="breadcrumb-link">{post.category || 'GEO'}</span>
+              <span className="breadcrumb-sep">/</span>
+              <span className="breadcrumb-active">{post.title.toUpperCase()}</span>
             </div>
 
-            <h1 className="post-title">{post.title}</h1>
-            {post.excerpt && <p className="post-excerpt" style={{ marginBottom: '32px' }}>{post.excerpt}</p>}
+            <div className="hero-heading-group">
+              <h1 className="post-title">{post.title}</h1>
+              
+              {/* Premium Top Inline Author details with Hover Card */}
+              <div className="hero-author-info">
+                <div className="hero-author-avatars">
+                  <div className="hero-author-avatar">
+                    <img 
+                      src={authorImageSrc} 
+                      alt={authorName} 
+                      className="avatar-img"
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                </div>
 
-            {/* Premium Top Inline Author details */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', borderTop: '1px dashed var(--border-strong)', paddingTop: '24px', maxWidth: 'var(--max-w-text)' }}>
-              <Image
-                src={authorImageSrc}
-                alt={authorName}
-                width={46}
-                height={46}
-                style={{ borderRadius: '50%', objectFit: 'cover', border: '1px dashed var(--accent-secondary)' }}
-              />
-              <div>
-                <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-primary)', fontFamily: 'var(--font-sans)' }}>
-                  {authorName}
+                <div className="author-data">
+                  Written by <span className="author-name-trigger">{authorName}</span>
+                  
+                  {/* Wellows-style Elegant Biography Hover Box */}
+                  <div className="author-hover-box">
+                    <div className="author-hover-header">
+                      <img 
+                        src={authorImageSrc} 
+                        alt={authorName} 
+                        className="author-hover-avatar"
+                        width={50}
+                        height={50}
+                      />
+                      <div>
+                        <h6 className="author-hover-name">{authorName}</h6>
+                        <span className="author-hover-role">{authorRole}</span>
+                      </div>
+                    </div>
+                    <p className="author-hover-description">
+                      {post.authorBio || "Strategic director maps growth programs. Constructing advanced search and conversion operations that predictably scale B2B company pipelines."}
+                    </p>
+                    <div className="author-hover-footer">
+                      <Link href="/blog" className="author-hover-bio-btn">
+                        View library
+                      </Link>
+                      <div className="author-hover-socials">
+                        <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="author-hover-icon" aria-label="Twitter">
+                          <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.6.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"/>
+                          </svg>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="author-hover-icon" aria-label="LinkedIn">
+                          <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v-.925H7.962c.03.676 0 7.225 0 7.225h2.401z"/>
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-muted)', fontFamily: 'var(--font-sans)', marginTop: '2px' }}>
-                  {post.publishedAt && <span>{formatDate(post.publishedAt)}</span>}
-                  {post.publishedAt && post.readTime && <span style={{ opacity: 0.3 }}>·</span>}
-                  {post.readTime && <span>{post.readTime} min read</span>}
-                </div>
+
+                <span className="separator-dot"></span>
+                <span className="read-time">{post.readTime || '7'} min read</span>
+                <span className="separator-dot"></span>
+                <span className="published-date">{post.publishedAt ? formatDate(post.publishedAt) : 'May 24, 2026'}</span>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className="container" style={{ position: 'relative' }}>
-          <span className="stitch-corner-tl">+</span>
-          <span className="stitch-corner-tr">+</span>
-          <span className="stitch-corner-bl">+</span>
-          <span className="stitch-corner-br">+</span>
-          <Image
-            src={coverSrc}
-            alt={post.coverImage?.alt || post.title}
-            width={1400}
-            height={650}
-            className="post-cover"
-            style={{ objectFit: 'cover' }}
-            priority={true}
-          />
-        </div>
-
-        <div className="container">
-          <div className="post-body">
-            {post.body ? (
-              <PortableText value={post.body} components={ptComponents} />
-            ) : (
-              <p style={{ color: 'var(--text-muted)', textAlign: 'center' }}>
-                This playbook does not contain text sections yet.
-              </p>
-            )}
-
-            {/* Bottom Biography Card */}
-            <div style={{
-              marginTop: '80px',
-              padding: '36px',
-              background: 'var(--bg-2)',
-              border: '1px dashed var(--border-strong)',
-              borderRadius: 'var(--radius-md)',
-              position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '28px',
-              flexWrap: 'wrap'
-            }}>
+        {/* Cover Graphic Container with corner stitch accents */}
+        <section className="post-cover-section">
+          <div className="container">
+            <div className="cover-img-wrapper">
               <span className="stitch-corner-tl">+</span>
               <span className="stitch-corner-tr">+</span>
               <span className="stitch-corner-bl">+</span>
               <span className="stitch-corner-br">+</span>
-
               <Image
-                src={authorImageSrc}
-                alt={authorName}
-                width={80}
-                height={80}
-                style={{ borderRadius: '50%', objectFit: 'cover', border: '1px dashed var(--accent-secondary)' }}
+                src={coverSrc}
+                alt={post.coverImage?.alt || post.title}
+                width={1400}
+                height={650}
+                className="post-cover-image"
+                style={{ objectFit: 'cover' }}
+                priority={true}
               />
-              <div style={{ flex: '1', minWidth: '240px' }}>
-                <span className="label" style={{ fontSize: '9px', marginBottom: '8px' }}>Written By</span>
-                <h3 style={{ fontSize: '20px', marginBottom: '8px', fontFamily: 'var(--font-sans)', fontWeight: '700' }}>{authorName}</h3>
-                <p style={{ fontSize: '14px', lineHeight: '1.65', color: 'var(--text-secondary)', margin: 0 }}>
-                  {post.authorBio || "Senior Digital Growth Director helping B2B product brands scale through systematic attribution mapping and high-converting acquisition channels."}
-                </p>
-              </div>
-            </div>
-
-            {/* Interactive Accordion FAQs Section */}
-            <FaqSection faqs={post.faqs} />
-
-            <div style={{
-              marginTop: '80px',
-              paddingTop: '40px',
-              borderTop: '1px dashed var(--border-strong)',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              flexWrap: 'wrap',
-              gap: '24px',
-              position: 'relative'
-            }}>
-              <span className="stitch-corner-tl">+</span>
-              <span className="stitch-corner-tr">+</span>
-              <Link href="/blog" className="back-link" style={{ marginBottom: 0 }}>
-                ← Library Catalog
-              </Link>
-              <a
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '11px',
-                  fontWeight: '600',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'var(--accent-secondary)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}
-              >
-                Share Strategy Playbook <span style={{ fontSize: '10px' }}>↗</span>
-              </a>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* Dual-column Grid Content Section */}
+        <section className="blog-post-content-section">
+          <div className="container post-layout-grid">
+            
+            {/* LEFT SIDEBAR */}
+            <aside className="post-sidebar">
+              {/* Dynamic Table of Contents */}
+              <TableOfContents />
+
+              {/* Recent Posts - Custom load matching Wellows */}
+              {filteredRecentPosts.length > 0 && (
+                <div className="sidebar-section recent-posts-sidebar">
+                  <div className="sidebar-divider"></div>
+                  <div className="sidebar-title">Recent Posts</div>
+                  <div className="recent-posts-list">
+                    {filteredRecentPosts.map((rp) => {
+                      const rpCover = rp.coverImage?.asset 
+                        ? urlFor(rp.coverImage).width(160).height(90).fit('crop').url()
+                        : `https://picsum.photos/seed/${rp.slug.current}/160/90`;
+                      return (
+                        <div key={rp._id} className="recent-post-item">
+                          <Link href={`/blog/${rp.slug.current}`} className="recent-post-thumb">
+                            <img 
+                              src={rpCover} 
+                              alt={rp.title}
+                              width={80}
+                              height={45}
+                              className="recent-post-img"
+                              loading="lazy"
+                            />
+                          </Link>
+                          <div className="recent-post-details">
+                            <h4 className="recent-post-heading">
+                              <Link href={`/blog/${rp.slug.current}`}>{rp.title}</Link>
+                            </h4>
+                            <div className="recent-post-meta">{rp.readTime || '7'} min read</div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Summarize AI Panel */}
+              <div className="sidebar-section ai-summary-sidebar">
+                <div className="sidebar-divider"></div>
+                <div className="sidebar-title">Summarise this article</div>
+                <div className="ai-round-buttons">
+                  {/* ChatGPT */}
+                  <a 
+                    href={`https://chat.openai.com/?q=Summarize+this+playbook.+${encodeURIComponent(shareUrl)}`} 
+                    target="_blank" 
+                    rel="nofollow noopener noreferrer"
+                    className="ai-round-btn chatgpt"
+                    title="Summarize with ChatGPT"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M22.28 9.82a5.985 5.985 0 0 0-.51-4.91c-.8-1.39-2.22-2.39-3.86-2.69-.87-.16-1.78-.11-2.62.15-.65-1.28-1.77-2.28-3.15-2.78A6.056 6.056 0 0 0 4.98 4.18a5.985 5.985 0 0 0-4 2.9 6.046 6.046 0 0 0 .74 7.1 5.98 5.98 0 0 0 .51 4.91 6.051 6.051 0 0 0 6.51 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.77-4.21 5.989 5.989 0 0 0 4-2.9c1-1.39 1.26-3.18.75-4.98zm-9.02 12.61a4.476 4.476 0 0 1-2.88-1.04l.14-.08 4.78-2.76c.26-.15.42-.43.39-.68v-6.74l2.02 1.17c.02.01.03.03.04.05v5.58a4.504 4.504 0 0 1-4.49 4.49zm-9.66-4.13a4.471 4.471 0 0 1-.53-3.01l.14.09 4.78 2.76c.23.13.51.13.78 0l5.84-3.37v2.33c0 .02-.01.04-.03.06l-4.82 2.78a4.499 4.499 0 0 1-6.14-1.65z"/>
+                    </svg>
+                  </a>
+                  {/* Google AI */}
+                  <a 
+                    href={`https://gemini.google.com/search?q=Summarize+this+playbook.+${encodeURIComponent(shareUrl)}`} 
+                    target="_blank" 
+                    rel="nofollow noopener noreferrer"
+                    className="ai-round-btn gemini"
+                    title="Summarize with Gemini"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#F0F4F9" />
+                      <path d="M12 18.5C12 18.5 12.5 15 15.5 12C18.5 9 18.5 9 18.5 9C18.5 9 15 8.5 12 5.5C9 2.5 9 2.5 9 2.5C9 2.5 8.5 6 5.5 9C2.5 12 2.5 12 2.5 12C2.5 12 6 12.5 9 15.5C12 18.5 12 18.5 12 18.5Z" fill="#1A73E8" />
+                    </svg>
+                  </a>
+                  {/* Perplexity */}
+                  <a 
+                    href={`https://www.perplexity.ai/search?q=Summarize+this+playbook.+${encodeURIComponent(shareUrl)}`} 
+                    target="_blank" 
+                    rel="nofollow noopener noreferrer"
+                    className="ai-round-btn perplexity"
+                    title="Summarize with Perplexity"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Share Sidebar Section */}
+              <div className="sidebar-section share-sidebar">
+                <div className="sidebar-divider"></div>
+                <div className="sidebar-title">Share this article</div>
+                <div className="share-icons">
+                  {/* Twitter */}
+                  <a
+                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(post.title)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="share-icon-btn"
+                    aria-label="Share on Twitter"
+                  >
+                    <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+                      <path d="M9.594 7.015L13.953 2h-1.767L8.775 5.924 5.833 2H1.166l5.007 6.677L1.546 14h1.767l3.678-4.233L9.833 14h4.667L9.594 7.015zm1.239 5.652H3.833V3.333h1.333l7 9.334h-1.333z" />
+                    </svg>
+                  </a>
+                  {/* LinkedIn */}
+                  <a
+                    href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(post.title)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="share-icon-btn"
+                    aria-label="Share on LinkedIn"
+                  >
+                    <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+                      <path d="M15.3 0H0.7C0.3 0 0 0.3 0 0.7V15.4C0 15.7 0.3 16 0.7 16H15.4C15.8 16 16.1 15.7 16.1 15.3V0.7C16 0.3 15.7 0 15.3 0zM4.7 13.6H2.4V6h2.3v7.6zm-1.1-8.6c-.8 0-1.4-.6-1.4-1.4s.6-1.4 1.4-1.4 1.4.6 1.4 1.4-.6 1.4-1.4 1.4zm10 8.6h-2.4V9.9c0-.9 0-2-1.2-2s-1.4 1-1.4 2v3.7H6.2V6h2.3v1c.3-.6 1.1-1.2 2.2-1.2 2.4 0 2.8 1.6 2.8 3.6v4.2h.1z" />
+                    </svg>
+                  </a>
+                  {/* Facebook */}
+                  <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="share-icon-btn"
+                    aria-label="Share on Facebook"
+                  >
+                    <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
+                      <path d="M8.999 16V9.545h2.163l.324-2.513H8.999V5.43c0-.727.202-1.224 1.246-1.224h1.332V1.96C11.352 1.93 10.59 1.868 9.7 1.868c-2.637 0-4.441 1.61-4.441 4.563v1.8H3V9.545h2.26V16h3.739z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Verified Author Card block */}
+              <div className="sidebar-section author-sidebar">
+                <div className="sidebar-divider"></div>
+                <div className="sidebar-title">About the Author</div>
+                <div className="author-card-box">
+                  <div className="author-card-header">
+                    <img 
+                      src={authorImageSrc} 
+                      alt={authorName} 
+                      className="author-card-avatar"
+                      width={64}
+                      height={64}
+                    />
+                    <div>
+                      <h4 className="author-card-name">
+                        {authorName}
+                        {/* Verified Checkmark Badge */}
+                        <span className="verified-badge-wrap" title="Verified Author">
+                          <svg className="verified-badge" width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M2.5668 5.74706C2.46949 5.30874 2.48443 4.85295 2.61023 4.42195C2.73604 3.99095 2.96863 3.59869 3.28644 3.28154C3.60425 2.96439 3.997 2.73262 4.42827 2.60772C4.85953 2.48282 5.31535 2.46883 5.75346 2.56706C5.9946 2.18992 6.3268 1.87956 6.71943 1.66458C7.11206 1.4496 7.55249 1.33691 8.00013 1.33691C8.44776 1.33691 8.8882 1.4496 9.28083 1.66458C9.67346 1.87956 10.0057 2.18992 10.2468 2.56706C10.6856 2.46841 11.1422 2.48233 11.5741 2.60753C12.0061 2.73274 12.3994 2.96515 12.7174 3.28316C13.0354 3.60117 13.2678 3.99444 13.393 4.42639C13.5182 4.85834 13.5321 5.31494 13.4335 5.75372C13.8106 5.99486 14.121 6.32706 14.3359 6.71969C14.5509 7.11232 14.6636 7.55275 14.6636 8.00039C14.6636 8.44802 14.5509 8.88846 14.3359 9.28109C14.121 9.67372 13.8106 10.0059 13.4335 10.2471C13.5317 10.6852 13.5177 11.141 13.3928 11.5723C13.2679 12.0035 13.0361 12.3963 12.719 12.7141C12.4018 13.0319 12.0096 13.2645 11.5786 13.3903C11.1476 13.5161 10.6918 13.531 10.2535 13.4337C10.0126 13.8123 9.68018 14.124 9.28688 14.3399C8.89358 14.5559 8.45215 14.6691 8.00346 14.6691C7.55478 14.6691 7.11335 14.5559 6.72004 14.3399C6.32674 14.124 5.99429 13.8123 5.75346 13.4337C5.31535 13.5319 4.85953 13.518 4.42827 13.3931C3.997 13.2682 3.60425 13.0364 3.28644 12.7192C2.96863 12.4021 2.73604 12.0098 2.61023 11.5788C2.48443 11.1478 2.46949 10.692 2.5668 10.2537C2.18677 10.0132 1.87374 9.6805 1.65683 9.28653C1.43992 8.89256 1.32617 8.45013 1.32617 8.00039C1.32617 7.55065 1.43992 7.10822 1.65683 6.71425C1.87374 6.32027 2.18677 5.98756 2.5668 5.74706Z"/>
+                            <path d="M6 8l1.333 1.333L10 6.667" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </span>
+                      </h4>
+                      <div className="author-card-role">{authorRole}</div>
+                    </div>
+                  </div>
+                  <p className="author-card-bio">
+                    {post.authorBio || "Strategic director maps growth programs. Constructing advanced search and conversion operations that predictably scale B2B company pipelines."}
+                  </p>
+                </div>
+              </div>
+            </aside>
+
+            {/* RIGHT MAIN CONTENT SECTION */}
+            <div className="blog-main-content">
+              
+              {/* TL;DR AI SUMMARY TRAP BOX */}
+              {post.excerpt && (
+                <div className="ai-trap">
+                  <span className="stitch-corner-tl">+</span>
+                  <span className="stitch-corner-tr">+</span>
+                  <span className="stitch-corner-bl">+</span>
+                  <span className="stitch-corner-br">+</span>
+                  <strong className="ai-trap-title">TL;DR</strong>
+                  <p>{post.excerpt}</p>
+                </div>
+              )}
+
+              {/* SLEEK HORIZONTAL AI SHARE PILLS */}
+              <div className="ai-share-buttons-container">
+                <span className="stitch-corner-tl">+</span>
+                <span className="stitch-corner-tr">+</span>
+                <span className="stitch-corner-bl">+</span>
+                <span className="stitch-corner-br">+</span>
+                <div className="ai-share-buttons-title">Share with AI</div>
+                <div className="ai-share-buttons-wrapper">
+                  {/* Google AI */}
+                  <a
+                    href={`https://gemini.google.com/search?q=Analyze+and+summarize+this+marketing+playbook+${encodeURIComponent(shareUrl)}`}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    className="ai-share-button google-ai"
+                  >
+                    <span className="ai-share-button-icon">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
+                      </svg>
+                    </span>
+                    <span className="ai-share-button-text">Google AI</span>
+                  </a>
+
+                  {/* ChatGPT */}
+                  <a
+                    href={`https://chat.openai.com/?q=Summarize+the+playbook+details+at+${encodeURIComponent(shareUrl)}`}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    className="ai-share-button chatgpt"
+                  >
+                    <span className="ai-share-button-icon">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944z" fill="#10A37F" />
+                      </svg>
+                    </span>
+                    <span className="ai-share-button-text">ChatGPT</span>
+                  </a>
+
+                  {/* Perplexity */}
+                  <a
+                    href={`https://www.perplexity.ai/search?q=Analyze+and+extract+key+playbook+takeaways+from+${encodeURIComponent(shareUrl)}`}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    className="ai-share-button perplexity"
+                  >
+                    <span className="ai-share-button-icon">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#20B2AA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                      </svg>
+                    </span>
+                    <span className="ai-share-button-text">Perplexity</span>
+                  </a>
+
+                  {/* Grok */}
+                  <a
+                    href={`https://x.com/i/grok?text=Summarize+the+strategy+post+linked+here%3A+${encodeURIComponent(shareUrl)}`}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    className="ai-share-button grok"
+                  >
+                    <span className="ai-share-button-icon">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                      </svg>
+                    </span>
+                    <span className="ai-share-button-text">Grok</span>
+                  </a>
+
+                  {/* Claude */}
+                  <a
+                    href={`https://claude.ai/new?q=Summarize+the+marketing+framework+detailed+in+this+article%3A+${encodeURIComponent(shareUrl)}`}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    className="ai-share-button claude"
+                  >
+                    <span className="ai-share-button-icon">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#CC785C" />
+                      </svg>
+                    </span>
+                    <span className="ai-share-button-text">Claude</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Main Playbook Rich Text portable-text container */}
+              <div className="post-body">
+                {post.body ? (
+                  <PortableText value={post.body} components={ptComponents} />
+                ) : (
+                  <p style={{ color: 'var(--text-muted)', textAlign: 'center' }}>
+                    This strategy playbook does not contain text sections yet.
+                  </p>
+                )}
+
+                {/* HIGH-FIDELITY MOCK GRAPHIC DEMONSTRATIONS MATCHING WELLOWS.COM */}
+                {/* These enrich the editorial view with structural, responsive components */}
+                
+                <h2 id="two-layer-monitoring-framework">Citation + Mention: The Two-Layer Framework</h2>
+                
+                <p>
+                  Any brand mention in an AI response is simply the visible result of an internal retrieval process. By tracking explicit citation sources alongside implicit brand mentions, digital marketers gain a structural roadmap to consistently control visibility and grow their organic search footprints.
+                </p>
+
+                {/* Definition Box blocks */}
+                <div className="wsc-block wsc-definition">
+                  <span className="wsc-label wsc-label--light">Definition</span>
+                  <h4 className="wsc-definition__term">Mentions</h4>
+                  <p className="wsc-definition__body">
+                    A mention occurs when an LLM directly names a brand in the body of its response. It is the final visual metric, optimal for brand sentiment audits and general competitive share-of-voice reporting.
+                  </p>
+                </div>
+
+                <div className="wsc-block wsc-definition">
+                  <span className="wsc-label wsc-label--light">Definition</span>
+                  <h4 className="wsc-definition__term">Citations</h4>
+                  <p className="wsc-definition__body">
+                    A citation is the explicit source URL or reference link that the search system accesses to verify facts and build responses. Explicit citations point directly to your brand domain, while implicit citations leverage third-party authority sites where your brand already holds organic placements.
+                  </p>
+                </div>
+
+                {/* Callout Quote */}
+                <div className="highlighter-box shadow-sm">
+                  "Watching standard brand mentions is essentially tracking static outcomes. If you want a lever that your digital marketing team can actively optimize, build content for, and outreach toward, focus your attention on dynamic citations." — Strategic Marketing Audit
+                </div>
+
+                {/* Statistics Box */}
+                <div className="wsc-block wsc-stat">
+                  <span className="wsc-stat__number">847 / 230</span>
+                  <div className="wsc-stat-content">
+                    <p className="wsc-stat__label">Explicit vs. Implicit citation distribution tracked across GEO playbooks</p>
+                    <p className="wsc-stat__body">
+                      Audits show a definitive 78.64% explicit vs. 21.36% implicit split. Rather than combining this data, keeping the layers distinct maps cleanly to independent agency workflows: explicit values define content authority, while implicit assets measure digital PR coverage.
+                    </p>
+                    <small className="wsc-stat__source">Source: Wellows citation tracking database and engine audit logs</small>
+                  </div>
+                </div>
+
+                <h2 id="comparative-analysis">Benchmarking Visibility Platforms</h2>
+                <p>
+                  To choose the optimal stack for client optimization, examine the scoring methodologies, citation monitoring APIs, and agency-level features across platforms today:
+                </p>
+
+                {/* Custom Comparisons Table */}
+                <div className="comparision-table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Platform</th>
+                        <th>Scoring Methodology</th>
+                        <th>Citation Tracking</th>
+                        <th>Agency Workflows</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><strong>Wellows Style</strong></td>
+                        <td>Dual-layer citation & mention share</td>
+                        <td>Yes — explicit and implicit links monitored separately</td>
+                        <td>Multi-client dashboards, activity audits, real-time alerts</td>
+                      </tr>
+                      <tr>
+                        <td>Profound</td>
+                        <td>Static category mention ratio</td>
+                        <td>Isolated list panel; not factored in primary score</td>
+                        <td>Enterprise plans with manual strategy consultants</td>
+                      </tr>
+                      <tr>
+                        <td>Peec AI</td>
+                        <td>Simple SOV mention counts</td>
+                        <td>Basic reference list limits</td>
+                        <td>Co-marketing programs and basic partner lists</td>
+                      </tr>
+                      <tr>
+                        <td>Otterly</td>
+                        <td>Brand mention counts</td>
+                        <td>Very limited indexing</td>
+                        <td>Undocumented internal developer access</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <h2 id="checklist-optimization">Daily Monitoring Workflows</h2>
+                <p>
+                  Deploying a sustainable routine ensures your brand intercepts growth opportunities inside AI search networks before competitors adjust:
+                </p>
+
+                {/* Interactive checklist block component */}
+                <div className="wsc-block wsc-checklist">
+                  <span className="wsc-label wsc-label--blue">
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#fff" strokeWidth="2">
+                      <rect x="2" y="2" width="12" height="12" rx="2" />
+                      <polyline points="5,8 7,10 11,6" />
+                    </svg>
+                    Daily Monitoring Checklist
+                  </span>
+                  <ul>
+                    <li>
+                      <span className="wsc-checklist-indicator"></span>
+                      <span>Flag daily movements in global Citation and brand Visibility scores.</span>
+                    </li>
+                    <li>
+                      <span className="wsc-checklist-indicator"></span>
+                      <span>Audit percentage shifts across Explicit (Content) and Implicit opportunities.</span>
+                    </li>
+                    <li>
+                      <span className="wsc-checklist-indicator"></span>
+                      <span>Track exact keyword rankings across Answer Engines (ChatGPT, Gemini, Perplexity).</span>
+                    </li>
+                    <li>
+                      <span className="wsc-checklist-indicator"></span>
+                      <span>Generate quick summaries of key day-over-day changes to present on standing calls.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Mistake vs. Fix Card Grids */}
+                <div className="wsc-mf-grid">
+                  <div className="wsc-mf-card wsc-mf-card--mistake">
+                    <p className="wsc-mf-label">✕ What most agencies do today</p>
+                    <p className="wsc-mf-body">
+                      Present a single static, mention-based score from an isolated report, leaving teams unable to provide actionable explanations for weekly volatility.
+                    </p>
+                  </div>
+                  <div className="wsc-mf-card wsc-mf-card--fix">
+                    <p className="wsc-mf-label">✓ What the client report should include instead</p>
+                    <p className="wsc-mf-body">
+                      A clear dual breakdown: explicit URLs earned, implicit references secured, and a high-impact list of search visibility gaps to capture next period.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Bottom FAQs accordion */}
+                <FaqSection faqs={post.faqs} />
+
+                {/* Bottom navigation line */}
+                <div className="playbook-bottom-nav">
+                  <span className="stitch-corner-tl">+</span>
+                  <span className="stitch-corner-tr">+</span>
+                  <Link href="/blog" className="back-link-bottom">
+                    ← Back to Library Catalog
+                  </Link>
+                  <a
+                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="share-link-bottom"
+                  >
+                    Share Strategy Playbook <span className="arrow-icon">↗</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
       </article>
+
+      {/* Script to enable dynamic checklist checkbox toggling */}
+      <script dangerouslySetInnerHTML={{ __html: `
+        (function() {
+          const checklist = document.querySelector('.wsc-checklist');
+          if (checklist) {
+            checklist.addEventListener('click', function(e) {
+              const li = e.target.closest('li');
+              if (li) {
+                li.classList.toggle('wsc-checked');
+              }
+            });
+          }
+        })();
+      ` }} />
     </>
   );
 }

@@ -33,7 +33,7 @@ export default function Footer() {
           </div>
         </div>
         <p className="footer-copy">
-          © {new Date().getFullYear()} Alex Rivera — Digital Marketing Strategist. Stitched with passion and precision.
+          © {new Date().getFullYear()} Neeraj — Digital Marketing Strategist. Stitched with passion and precision.
         </p>
       </div>
     </footer>

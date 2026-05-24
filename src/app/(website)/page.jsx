@@ -247,7 +247,7 @@ export default async function HomePage() {
               <div className="about-image-frame">
                 <Image
                   src="https://picsum.photos/seed/editorial/600/800"
-                  alt="Alex Rivera Portrait"
+                  alt="Neeraj Portrait"
                   width={600}
                   height={800}
                   style={{ objectFit: 'cover' }}
@@ -265,7 +265,7 @@ export default async function HomePage() {
               <h2 style={{ marginTop: '16px' }}>Data-driven strategy.<br />Repeatable growth patterns.</h2>
 
               <p>
-                I am Alex Rivera — a digital growth consultant specializing in turning underperforming
+                I am Neeraj — a digital growth consultant specializing in turning underperforming
                 funnels into highly optimized, scaling sales operations. Operating as a strategic marketing
                 director, I collaborate with founders to construct scalable distribution frameworks.
               </p>

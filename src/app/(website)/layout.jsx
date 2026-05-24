@@ -18,14 +18,18 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: { default: 'Alex Rivera — Digital Marketing Strategist', template: '%s | Alex Rivera' },
+  title: { default: 'Neeraj — Digital Marketing Strategist', template: '%s | Neeraj' },
   description:
     'Award-winning digital marketing strategist helping ambitious brands grow through data-driven SEO, paid media, content, and analytics.',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://alexrivera.marketing',
-    siteName: 'Alex Rivera',
+    siteName: 'Neeraj',
+  },
+  robots: {
+    index: false,
+    follow: false,
   },
 };
 

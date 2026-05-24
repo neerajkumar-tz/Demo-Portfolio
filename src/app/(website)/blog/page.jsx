@@ -3,7 +3,7 @@ import { getAllPosts } from '../../../lib/sanity';
 
 export const metadata = {
   title: 'Marketing Playbooks & Blueprints',
-  description: 'Deep digital marketing deep dives, B2B acquisition guides, conversion audits, and data analysis strategies by Alex Rivera.',
+  description: 'Deep digital marketing deep dives, B2B acquisition guides, conversion audits, and data analysis strategies by Neeraj.',
 };
 
 export const revalidate = 60;

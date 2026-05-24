@@ -6,7 +6,7 @@ import { schemaTypes } from './sanity/schemas/index';
 
 export default defineConfig({
   name: 'alex-rivera-portfolio',
-  title: 'Alex Rivera — Portfolio & Blog',
+  title: 'Neeraj — Portfolio & Blog',
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   basePath: '/studio',
