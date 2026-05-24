@@ -107,6 +107,57 @@ export default defineType({
       type: 'boolean',
       initialValue: false,
     }),
+    defineField({
+      name: 'authorName',
+      title: 'Author Name',
+      type: 'string',
+    }),
+    defineField({
+      name: 'authorBio',
+      title: 'Author Bio',
+      type: 'text',
+      rows: 3,
+    }),
+    defineField({
+      name: 'authorImage',
+      title: 'Author Image',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alt Text',
+        },
+      ],
+    }),
+    defineField({
+      name: 'faqs',
+      title: 'FAQs',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'faq',
+          title: 'FAQ Item',
+          fields: [
+            {
+              name: 'question',
+              type: 'string',
+              title: 'Question',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'answer',
+              type: 'text',
+              title: 'Answer',
+              rows: 4,
+              validation: (Rule) => Rule.required(),
+            },
+          ],
+        },
+      ],
+    }),
   ],
   preview: {
     select: { title: 'title', category: 'category', media: 'coverImage' },

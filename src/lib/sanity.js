@@ -47,7 +47,9 @@ export async function getPostBySlug(slug) {
   return client.fetch(
     `*[_type == "post" && slug.current == $slug][0] {
       _id, title, slug, excerpt, category, readTime, publishedAt, body,
-      coverImage { asset, alt }
+      coverImage { asset, alt },
+      authorName, authorBio, authorImage { asset, alt },
+      faqs
     }`,
     { slug }
   );
