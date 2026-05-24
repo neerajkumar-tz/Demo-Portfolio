@@ -12,8 +12,7 @@ export default function FaqSection({ faqs }) {
 
   return (
     <section style={{ marginTop: '80px', paddingTop: '56px', borderTop: '1px dashed var(--border-strong)', position: 'relative' }}>
-      <span className="stitch-corner-tl">+</span>
-      <span className="stitch-corner-tr">+</span>
+
 
       <span className="label" style={{ marginBottom: '16px' }}>FAQ Guide</span>
       <h2 style={{ fontSize: '32px', marginBottom: '32px', fontFamily: 'var(--font-display)', fontWeight: '500' }}>

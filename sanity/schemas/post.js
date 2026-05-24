@@ -99,6 +99,38 @@ export default defineType({
           options: { hotspot: true },
           fields: [{ name: 'alt', type: 'string', title: 'Alt Text' }],
         },
+        {
+          type: 'table',
+          title: 'Comparison Table'
+        },
+        {
+          type: 'object',
+          name: 'callout',
+          title: 'Callout Box',
+          fields: [
+            {
+              name: 'text',
+              type: 'text',
+              title: 'Callout Text',
+              rows: 3,
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'type',
+              type: 'string',
+              title: 'Callout Type (Color & Border Accent)',
+              options: {
+                list: [
+                  { title: 'Info (Electric Blue)', value: 'info' },
+                  { title: 'Warning (Vibrant Yellow)', value: 'warning' },
+                  { title: 'Success (Emerald Green)', value: 'success' },
+                  { title: 'Important (Electric Orange)', value: 'important' },
+                ],
+              },
+              initialValue: 'info',
+            },
+          ],
+        },
       ],
     }),
     defineField({
@@ -108,8 +140,15 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'reference',
+      description: 'Choose a reusable author profile (Name, Role, Bio, Image). This overrides manual overrides below.',
+      to: [{ type: 'author' }],
+    }),
+    defineField({
       name: 'authorName',
-      title: 'Author Name',
+      title: 'Author Name (Manual Override)',
       type: 'string',
     }),
     defineField({

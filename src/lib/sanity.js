@@ -49,6 +49,7 @@ export async function getPostBySlug(slug) {
       _id, title, slug, excerpt, category, readTime, publishedAt, body,
       coverImage { asset, alt },
       authorName, authorBio, authorImage { asset, alt },
+      author->{ name, bio, role, image { asset, alt } },
       faqs
     }`,
     { slug }
