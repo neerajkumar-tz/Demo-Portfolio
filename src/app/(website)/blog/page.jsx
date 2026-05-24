@@ -22,11 +22,6 @@ export default async function BlogPage() {
   return (
     <>
       <section className="page-hero">
-        {/* Stitch Corner Indicators */}
-        <span className="stitch-corner-tl">+</span>
-        <span className="stitch-corner-tr">+</span>
-        <span className="stitch-corner-bl">+</span>
-        <span className="stitch-corner-br">+</span>
         
         <div className="container">
           <span className="label">Playbooks &amp; Systems</span>
@@ -51,10 +46,6 @@ export default async function BlogPage() {
               textAlign: 'center',
               position: 'relative'
             }}>
-              <span className="stitch-corner-tl">+</span>
-              <span className="stitch-corner-tr">+</span>
-              <span className="stitch-corner-bl">+</span>
-              <span className="stitch-corner-br">+</span>
               
               <p style={{ fontFamily: 'var(--font-ui)', fontSize: '15px', color: 'var(--text-muted)', marginBottom: '16px' }}>
                 No playbooks found.

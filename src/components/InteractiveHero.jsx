@@ -113,10 +113,6 @@ export default function InteractiveHero() {
             className="animate-fade-up delay-4 pipeline-3d-card" 
             style={svgStyle}
           >
-            <span className="stitch-corner-tl">+</span>
-            <span className="stitch-corner-tr">+</span>
-            <span className="stitch-corner-bl">+</span>
-            <span className="stitch-corner-br">+</span>
             
             <div className="pipeline-card-header">
               <span className="pipeline-sys-title">Marketing Pipeline Attribution.sys</span>
@@ -128,6 +124,18 @@ export default function InteractiveHero() {
             </div>
 
             <svg viewBox="0 0 800 240" fill="none" xmlns="http://www.w3.org/2000/svg" className="pipeline-svg">
+              <defs>
+                <linearGradient id="vibrant-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#8b5cf6" />
+                  <stop offset="50%" stopColor="#ec4899" />
+                  <stop offset="100%" stopColor="#ff5c35" />
+                </linearGradient>
+                <linearGradient id="vibrant-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#06b6d4" />
+                  <stop offset="100%" stopColor="#10b981" />
+                </linearGradient>
+              </defs>
+
               {/* Dotted Grid lines */}
               <line x1="50" y1="20" x2="750" y2="20" stroke="var(--border)" strokeDasharray="3 6" />
               <line x1="50" y1="80" x2="750" y2="80" stroke="var(--border)" strokeDasharray="3 6" />
@@ -140,27 +148,27 @@ export default function InteractiveHero() {
               <line x1="600" y1="0" x2="600" y2="240" stroke="var(--border)" strokeDasharray="2 4" />
               
               {/* Interactive Curve Paths */}
-              <path d="M 80,140 Q 200,60 320,110 T 560,180 T 720,50" className="animated-path-primary" stroke="var(--accent)" strokeWidth="3" strokeLinecap="round" />
-              <path d="M 80,140 Q 200,60 320,110 T 560,180 T 720,50" stroke="var(--accent)" strokeWidth="8" strokeLinecap="round" opacity="0.15" />
+              <path d="M 80,140 Q 200,60 320,110 T 560,180 T 720,50" className="animated-path-primary" stroke="url(#vibrant-grad-1)" strokeWidth="3" strokeLinecap="round" />
+              <path d="M 80,140 Q 200,60 320,110 T 560,180 T 720,50" stroke="url(#vibrant-grad-1)" strokeWidth="8" strokeLinecap="round" opacity="0.15" />
               
-              <path d="M 80,160 Q 200,100 320,160 T 560,90 T 720,110" stroke="var(--accent-secondary)" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
+              <path d="M 80,160 Q 200,100 320,160 T 560,90 T 720,110" stroke="url(#vibrant-grad-2)" strokeWidth="2" strokeLinecap="round" opacity="0.4" />
               
               {/* Nodes & Data Dots */}
-              <circle cx="80" cy="140" r="5" fill="var(--bg-2)" stroke="var(--accent)" strokeWidth="2" />
-              <circle cx="270" cy="95" r="5" fill="var(--bg-2)" stroke="var(--accent)" strokeWidth="2" />
-              <circle cx="480" cy="145" r="5" fill="var(--bg-2)" stroke="var(--accent)" strokeWidth="2" />
+              <circle cx="80" cy="140" r="5" fill="var(--bg-2)" stroke="#8b5cf6" strokeWidth="2" />
+              <circle cx="270" cy="95" r="5" fill="var(--bg-2)" stroke="#ec4899" strokeWidth="2" />
+              <circle cx="480" cy="145" r="5" fill="var(--bg-2)" stroke="#ff5c35" strokeWidth="2" />
               
               {/* Revenue Node pulsing */}
-              <circle cx="720" cy="50" r="6" fill="var(--bg-2)" stroke="var(--accent)" strokeWidth="3" className="pulsing-revenue-dot" />
+              <circle cx="720" cy="50" r="6" fill="var(--bg-2)" stroke="#ec4899" strokeWidth="3" className="pulsing-revenue-dot" />
               
               {/* Labels */}
               <text x="80" y="225" fill="var(--text-muted)" fontSize="10" fontFamily="var(--font-sans)" letterSpacing="0.1em" textAnchor="middle">ACQUISITION</text>
               <text x="280" y="225" fill="var(--text-muted)" fontSize="10" fontFamily="var(--font-sans)" letterSpacing="0.1em" textAnchor="middle">ENGAGEMENT</text>
               <text x="480" y="225" fill="var(--text-muted)" fontSize="10" fontFamily="var(--font-sans)" letterSpacing="0.1em" textAnchor="middle">RETENTION</text>
-              <text x="680" y="225" fill="var(--accent)" fontSize="10" fontFamily="var(--font-sans)" letterSpacing="0.1em" textAnchor="middle" fontWeight="bold">REVENUE ENGINE</text>
+              <text x="680" y="225" fill="#ec4899" fontSize="10" fontFamily="var(--font-sans)" letterSpacing="0.1em" textAnchor="middle" fontWeight="bold">REVENUE ENGINE</text>
               
               {/* Real-time moving signal dots */}
-              <circle cx="0" cy="0" r="4" fill="var(--accent-secondary)">
+              <circle cx="0" cy="0" r="4" fill="#06b6d4">
                 <animateMotion path="M 80,140 Q 200,60 320,110 T 560,180 T 720,50" dur="6s" repeatCount="indefinite" />
               </circle>
             </svg>

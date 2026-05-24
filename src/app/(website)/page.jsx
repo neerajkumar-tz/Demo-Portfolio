@@ -127,10 +127,6 @@ export default async function HomePage() {
               { n: '$40M+', l: 'Attributed Paid Acquisition Budget' },
             ].map(({ n, l }) => (
               <div className="stat-card" key={l}>
-                <span className="stitch-corner-tl">+</span>
-                <span className="stitch-corner-tr">+</span>
-                <span className="stitch-corner-bl">+</span>
-                <span className="stitch-corner-br">+</span>
                 <div className="stat-number">{n}</div>
                 <div className="stat-label">{l}</div>
               </div>
@@ -145,10 +141,6 @@ export default async function HomePage() {
           <div className="about-grid">
             <div className="about-image-wrap">
               {/* Stitched grid layout corners inside wrapping frame */}
-              <span className="stitch-corner-tl">+</span>
-              <span className="stitch-corner-tr">+</span>
-              <span className="stitch-corner-bl">+</span>
-              <span className="stitch-corner-br">+</span>
               <div className="about-image-frame">
                 <Image
                   src="https://picsum.photos/seed/editorial/600/800"
@@ -211,10 +203,6 @@ export default async function HomePage() {
           <div className="services-grid">
             {SERVICES.map(({ icon, title, desc }) => (
               <div className="service-card" key={title}>
-                <span className="stitch-corner-tl">+</span>
-                <span className="stitch-corner-tr">+</span>
-                <span className="stitch-corner-bl">+</span>
-                <span className="stitch-corner-br">+</span>
                 <span className="service-icon">{icon}</span>
                 <h3>{title}</h3>
                 <p>{desc}</p>
@@ -250,10 +238,6 @@ export default async function HomePage() {
               textAlign: 'center',
               position: 'relative'
             }}>
-              <span className="stitch-corner-tl">+</span>
-              <span className="stitch-corner-tr">+</span>
-              <span className="stitch-corner-bl">+</span>
-              <span className="stitch-corner-br">+</span>
               <p style={{ fontFamily: 'var(--font-ui)', fontSize: '14px', color: 'var(--text-muted)' }}>
                 Populating recent playbooks... Run <code style={{ background: 'var(--bg-3)', padding: '4px 10px', borderRadius: '4px', color: 'var(--accent)' }}>npm run seed</code> to trigger demo posts.
               </p>
@@ -271,10 +255,6 @@ export default async function HomePage() {
           <div className="testimonials-grid">
             {TESTIMONIALS.map(({ quote, name, role, initials }) => (
               <div className="testimonial-card" key={name}>
-                <span className="stitch-corner-tl">+</span>
-                <span className="stitch-corner-tr">+</span>
-                <span className="stitch-corner-bl">+</span>
-                <span className="stitch-corner-br">+</span>
                 <div className="testimonial-quote">“</div>
                 <p>{quote}</p>
                 <div className="testimonial-author">

@@ -18,11 +18,6 @@ export default function BlogCard({ post }) {
 
   return (
     <article className="blog-card">
-      {/* Stitch Corner Indicators */}
-      <span className="stitch-corner-tl">+</span>
-      <span className="stitch-corner-tr">+</span>
-      <span className="stitch-corner-bl">+</span>
-      <span className="stitch-corner-br">+</span>
 
       <Link href={`/blog/${slug?.current}`}>
         <div className="blog-card-image">
