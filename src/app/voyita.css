@@ -1,20 +1,21 @@
 /* ── Voyita Premium SaaS Theme and Design System ── */
 
 :root {
-  --voyita-navy: #071630;
-  --voyita-navy-dark: #040d1c;
-  --voyita-navy-light: #0d1e3d;
-  --voyita-panel: #0F1F39;
-  --voyita-card: #172A4B;
-  --voyita-border: #23395F;
+  --voyita-navy: #FAF9F6;
+  --voyita-navy-dark: #F1F5F9;
+  --voyita-navy-light: #FFFFFF;
+  --voyita-panel: #FFFFFF;
+  --voyita-card: #FFFFFF;
+  --voyita-border: #E2E8F0;
   --voyita-blue: #5160EE;
-  --voyita-blue-glow: rgba(81, 96, 238, 0.15);
+  --voyita-blue-glow: rgba(81, 96, 238, 0.08);
   --voyita-orange: #F97316;
   --voyita-gold: #F59E0B;
-  --voyita-gold-glow: rgba(245, 158, 11, 0.12);
+  --voyita-gold-glow: rgba(245, 158, 11, 0.08);
   --voyita-off-white: #F8F7F3;
-  --voyita-text: #F8FAFC;
-  --voyita-text-muted: #94A3B8;
+  --voyita-text: #1E293B;
+  --voyita-text-muted: #64748B;
+  --voyita-text-dark: #0F172A;
   --voyita-white: #FFFFFF;
   --voyita-success: #22C55E;
   --voyita-error: #EF4444;
@@ -71,7 +72,7 @@
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.025em;
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
 }
 
 .voyita-h2 {
@@ -80,7 +81,7 @@
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.02em;
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
 }
 
 .voyita-h3 {
@@ -89,7 +90,7 @@
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: -0.015em;
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
 }
 
 .voyita-lead {
@@ -148,7 +149,7 @@
   align-items: center;
   justify-content: center;
   background-color: transparent;
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
   font-weight: 600;
   font-size: 15px;
   padding: 12px 28px;
@@ -158,8 +159,9 @@
 }
 
 .voyita-btn-secondary:hover {
-  border-color: var(--voyita-white);
-  background-color: rgba(255, 255, 255, 0.03);
+  border-color: var(--voyita-blue);
+  color: var(--voyita-blue);
+  background-color: rgba(81, 96, 238, 0.04);
   transform: translateY(-2px);
 }
 
@@ -226,7 +228,7 @@
 }
 
 .voyita-header.scrolled {
-  background-color: rgba(7, 22, 48, 0.85);
+  background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--voyita-border);
   height: 72px;
@@ -245,7 +247,7 @@
   gap: 8px;
   font-size: 22px;
   font-weight: 800;
-  color: var(--voyita-white) !important;
+  color: var(--voyita-text-dark) !important;
   letter-spacing: -0.02em;
 }
 
@@ -280,7 +282,7 @@
 }
 
 .voyita-nav-link:hover {
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
 }
 
 /* Features Dropdown Menu styling */
@@ -294,14 +296,14 @@
   left: 50%;
   transform: translateX(-50%) translateY(10px);
   width: 680px;
-  background-color: #0F1F39;
+  background-color: var(--voyita-panel);
   border: 1px solid var(--voyita-border);
   border-radius: 12px;
   padding: 24px;
   opacity: 0;
   visibility: hidden;
   transition: var(--voyita-transition);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
@@ -342,7 +344,7 @@
 .voyita-dropdown-title {
   font-size: 14px;
   font-weight: 600;
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
   margin-bottom: 2px;
 }
 
@@ -368,7 +370,7 @@
   display: block;
   width: 24px;
   height: 2px;
-  background-color: var(--voyita-white);
+  background-color: var(--voyita-text-dark);
   transition: var(--voyita-transition-fast);
 }
 
@@ -399,7 +401,7 @@
 .voyita-mobile-link {
   font-size: 18px;
   font-weight: 600;
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
   padding-bottom: 8px;
   border-bottom: 1px solid var(--voyita-border);
 }
@@ -539,7 +541,7 @@
 .voyita-stat-pill-val {
   font-size: 20px;
   font-weight: 700;
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
   line-height: 1.2;
 }
 
@@ -570,7 +572,7 @@
 .voyita-trip-table td {
   padding: 12px;
   font-size: 13px;
-  border-bottom: 1px solid rgba(35, 57, 95, 0.3);
+  border-bottom: 1px solid var(--voyita-border);
 }
 
 .voyita-trip-table tr:last-child td {
@@ -579,7 +581,7 @@
 
 .voyita-trip-name {
   font-weight: 600;
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
 }
 
 .voyita-trip-meta {
@@ -714,7 +716,7 @@
 
 .voyita-pain-card h3 {
   margin-bottom: 12px;
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
 }
 
 .voyita-pain-card p {
@@ -1086,7 +1088,7 @@
 }
 
 .voyita-comparison-item.voyita {
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
   font-weight: 500;
 }
 
@@ -1235,7 +1237,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
   margin-bottom: 24px;
 }
 
@@ -1251,11 +1253,11 @@
 }
 
 .voyita-footer-link:hover {
-  color: var(--voyita-white);
+  color: var(--voyita-text-dark);
 }
 
 .voyita-footer-bottom {
-  border-top: 1px solid rgba(35, 57, 95, 0.4);
+  border-top: 1px solid var(--voyita-border);
   padding-top: 32px;
   display: flex;
   justify-content: space-between;

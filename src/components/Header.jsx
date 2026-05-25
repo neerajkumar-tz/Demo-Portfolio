@@ -160,7 +160,7 @@ export default function Header() {
         <div className="voyita-mobile-nav">
           <Link href="/#about" className="voyita-mobile-link" onClick={() => setMobileActive(false)}>About Us</Link>
           <div style={{ paddingBottom: '8px', borderBottom: '1px solid var(--voyita-border)' }}>
-            <span style={{ fontSize: '18px', fontWeight: '600', color: 'var(--voyita-white)', display: 'block', marginBottom: '16px' }}>Features</span>
+            <span style={{ fontSize: '18px', fontWeight: '600', color: 'var(--voyita-text-dark)', display: 'block', marginBottom: '16px' }}>Features</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '12px', paddingLeft: '12px' }}>
               {FEATURES.map((feat) => (
                 <Link 

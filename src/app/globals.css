@@ -1,25 +1,25 @@
 /* ── Fonts are preloaded locally via Next.js next/font/google inside layout.jsx ── */
 /* ── CSS Design System & Variables ──────────────────────────────── */
 :root {
-  --bg: #0a0b16;
-  --bg-2: #12152b;
-  --bg-3: #1c2042;
-  --surface: rgba(255, 255, 255, 0.03);
-  --surface-hover: rgba(255, 255, 255, 0.06);
-  --border: rgba(255, 255, 255, 0.06);
-  --border-strong: rgba(255, 255, 255, 0.12);
-  --border-stitch: rgba(255, 255, 255, 0.18);
+  --bg: #FAF9F6;
+  --bg-2: #F1F5F9;
+  --bg-3: #E2E8F0;
+  --surface: rgba(0, 0, 0, 0.02);
+  --surface-hover: rgba(0, 0, 0, 0.04);
+  --border: rgba(0, 0, 0, 0.06);
+  --border-strong: rgba(0, 0, 0, 0.1);
+  --border-stitch: rgba(0, 0, 0, 0.12);
 
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #64748b;
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
 
   --accent: #ff5c35; /* Premium electric orange */
   --accent-rgb: 255, 92, 53;
-  --accent-secondary: #3b82f6; /* Electric blue */
-  --accent-secondary-rgb: 59, 130, 246;
-  --accent-glow: rgba(255, 92, 53, 0.15);
-  --accent-glow-sec: rgba(59, 130, 246, 0.15);
+  --accent-secondary: #5160EE; /* Premium electric blue */
+  --accent-secondary-rgb: 81, 96, 238;
+  --accent-glow: rgba(255, 92, 53, 0.08);
+  --accent-glow-sec: rgba(81, 96, 238, 0.08);
 
   /* Vibrant Positive Cosmic Colors */
   --accent-violet: #8b5cf6;
@@ -869,22 +869,22 @@ h1, h2, h3, h4 {
 }
 
 .blog-card {
-  background: rgba(22, 25, 45, 0.65) !important;
+  background: #FFFFFF !important;
   backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border: 1px solid var(--border-strong) !important;
   border-radius: var(--radius-md);
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03) !important;
 }
 
 .blog-card:hover {
   transform: translateY(-8px) scale(1.01) !important;
-  border-color: rgba(255, 92, 53, 0.35) !important;
-  box-shadow: 0 20px 40px rgba(255, 92, 53, 0.06), 0 30px 60px rgba(0, 0, 0, 0.45) !important;
+  border-color: rgba(81, 96, 238, 0.3) !important;
+  box-shadow: 0 15px 40px rgba(81, 96, 238, 0.08) !important;
 }
 
 .blog-card-image {
@@ -892,7 +892,7 @@ h1, h2, h3, h4 {
   aspect-ratio: 16/10;
   overflow: hidden;
   background: var(--bg-2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border);
 }
 
 .blog-card-image img {
@@ -915,12 +915,12 @@ h1, h2, h3, h4 {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: rgba(7, 7, 9, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(8px);
   color: var(--accent);
   padding: 6px 14px;
   border-radius: 99px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
 }
 
 .blog-card-body {

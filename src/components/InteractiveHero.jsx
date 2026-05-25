@@ -148,7 +148,7 @@ export default function InteractiveHero() {
               <div style={{ background: 'var(--voyita-card)', border: '1px solid var(--voyita-border)', borderRadius: '12px', padding: '16px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <div className="voyita-stat-pill-label" style={{ fontSize: '10px' }}>Selected Trip Metrics</div>
-                  <div style={{ fontSize: '14px', fontWeight: '700', color: 'var(--voyita-white)', marginTop: '4px' }}>
+                  <div style={{ fontSize: '14px', fontWeight: '700', color: 'var(--voyita-text-dark)', marginTop: '4px' }}>
                     {activeTrip.name}
                   </div>
                   <div style={{ fontSize: '11px', color: 'var(--voyita-text-muted)', marginTop: '2px' }}>
