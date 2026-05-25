@@ -421,7 +421,7 @@
   grid-template-columns: 1.1fr 0.9fr;
   gap: 64px;
   align-items: center;
-  padding-top: 140px;
+  padding-top: 24px;
 }
 
 .voyita-hero-text h1 {

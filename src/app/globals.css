@@ -2544,56 +2544,57 @@ h1, h2, h3, h4 {
 }
 
 .page-hero {
-  background: #070709 !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: var(--bg) !important;
+  border-bottom: 1px solid var(--border-strong) !important;
 }
 
 .filter-btn {
-  background: rgba(255, 255, 255, 0.02) !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
+  background: var(--bg-2) !important;
+  border-color: var(--border-strong) !important;
   color: var(--text-secondary) !important;
 }
 
 .filter-btn:hover {
-  border-color: var(--accent) !important;
-  color: #ffffff !important;
+  border-color: var(--accent-secondary) !important;
+  color: var(--text-primary) !important;
 }
 
 .filter-btn.active {
-  background: var(--accent) !important;
-  border-color: var(--accent) !important;
+  background: var(--accent-secondary) !important;
+  border-color: var(--accent-secondary) !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 15px rgba(255, 92, 53, 0.3) !important;
+  box-shadow: 0 4px 15px rgba(81, 96, 238, 0.2) !important;
 }
 
 /* Definition lists inner labels */
 .wsc-label--light {
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: rgba(0, 0, 0, 0.05) !important;
   color: var(--text-secondary) !important;
 }
 
 /* Wellows comparison table cells */
 .comparision-table-wrap {
-  border-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: var(--border-strong) !important;
 }
 
 .comparision-table-wrap table {
-  background: rgba(14, 14, 19, 0.75) !important;
+  background: #ffffff !important;
 }
 
 .comparision-table-wrap th {
-  background: rgba(255, 255, 255, 0.02) !important;
-  color: #ffffff !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: var(--bg-2) !important;
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--border-strong) !important;
 }
 
 .comparision-table-wrap td {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+  border-bottom: 1px solid var(--border) !important;
+  color: var(--text-secondary) !important;
 }
 
 /* FAQ Accordion Styling inside Playbook Detail view */
 .faq-section-box {
-  background: rgba(14, 14, 19, 0.75) !important;
+  background: #ffffff !important;
 }
 
 /* Custom 3D Parallax Graphic styles */
@@ -2612,12 +2613,12 @@ h1, h2, h3, h4 {
 
 /* Lora Editorial Content elements inside dark playbooks */
 .post-container-root {
-  background-color: #070709 !important;
-  color: #f8fafc !important;
+  background-color: var(--bg) !important;
+  color: var(--text-primary) !important;
 }
 
 .post-body p {
-  color: #e2e8f0 !important;
+  color: var(--text-secondary) !important;
 }
 
 .back-link-bottom {

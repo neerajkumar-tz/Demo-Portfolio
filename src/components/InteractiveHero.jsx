@@ -63,7 +63,7 @@ export default function InteractiveHero() {
   }, []);
 
   return (
-    <section className="voyita-section" style={{ background: 'linear-gradient(180deg, var(--voyita-navy-dark) 0%, var(--voyita-navy) 100%)', borderBottom: '1px solid var(--voyita-border)', paddingTop: '100px' }}>
+    <section className="voyita-section" style={{ background: 'linear-gradient(180deg, var(--voyita-navy-dark) 0%, var(--voyita-navy) 100%)', borderBottom: '1px solid var(--voyita-border)', paddingTop: '32px', paddingBottom: '32px' }}>
       <div className="voyita-container">
         <div className="voyita-hero-grid">
           
@@ -73,11 +73,11 @@ export default function InteractiveHero() {
               Purpose-built for SYTA operators
             </span>
             <h1 className="voyita-h1">
-              Group travel management <br />
-              software <span>without the chaos</span>
+              AI-powered group travel <br />
+              management, <span>built for operators</span>
             </h1>
             <p className="voyita-lead" style={{ marginTop: '20px' }}>
-              Voyita provides group tour operators one place to manage the full trip workflow. Handle everything from setup and quotations to traveler registration, payments, and on-trip operations.
+              Voyita's tour management software handles the repetitive work of trip creation, communications, and cost sheets.
             </p>
 
             <div className="voyita-hero-ctas">

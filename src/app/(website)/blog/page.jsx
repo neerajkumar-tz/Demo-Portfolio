@@ -2,8 +2,8 @@ import BlogCard from '../../../components/BlogCard';
 import { getAllPosts } from '../../../lib/sanity';
 
 export const metadata = {
-  title: 'Marketing Playbooks & Blueprints',
-  description: 'Deep digital marketing deep dives, B2B acquisition guides, conversion audits, and data analysis strategies by Brandlift.',
+  title: 'Voyita Growth Library — Operator Playbooks & Guides',
+  description: 'Learn how modern group tour operators use automation and self-service registration to double their trip count without adding headcount.',
 };
 
 export const revalidate = 60;
@@ -24,13 +24,13 @@ export default async function BlogPage() {
       <section className="page-hero">
         
         <div className="container">
-          <span className="label">Playbooks &amp; Systems</span>
+          <span className="label">Growth Library</span>
           <h1 style={{ marginTop: '20px' }}>
-            Tactical growth systems<br />refined in the field.
+            Tactical playbooks &amp; guides<br />refined in the field.
           </h1>
           <p style={{ marginTop: '20px' }}>
-            Attribution frameworks, search marketing architectures, performance media guidelines, 
-            and funnel experiments — written for technical marketers.
+            Itinerary automation frameworks, registration portal architectures, payment reconciliation sequences,
+            and fundraising strategies — written specifically for group tour operators.
           </p>
         </div>
       </section>

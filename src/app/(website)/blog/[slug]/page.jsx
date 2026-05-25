@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
     const post = await getPostBySlug(params.slug);
     if (!post) return {};
     return {
-      title: `${post.title} | Brandlift Playbooks`,
+      title: `${post.title} | Voyita Growth Library`,
       description: post.excerpt,
     };
   } catch {
@@ -91,13 +91,13 @@ export default async function PostPage({ params }) {
     : `https://picsum.photos/seed/${params.slug}/1400/650`;
 
   // Calculate Author details with secure fallback defaults
-  const authorName = post.authorName || 'Brandlift';
-  const authorRole = 'Digital Marketing Director';
+  const authorName = post.authorName || 'Voyita Team';
+  const authorRole = 'Group Tour Expert';
   const authorImageSrc = post.authorImage?.asset
     ? urlFor(post.authorImage).width(120).height(120).fit('crop').url()
     : `https://picsum.photos/seed/${encodeURIComponent(authorName)}/120/120`;
 
-  const shareUrl = `https://sanitytz.vercel.app/blog/${params.slug}`;
+  const shareUrl = `https://voyita.com/blog/${params.slug}`;
 
   // Filter out the current post from recent posts to avoid duplicate listings
   const filteredRecentPosts = recentPosts
@@ -115,11 +115,11 @@ export default async function PostPage({ params }) {
           <div className="container">
             {/* Wellows-style Breadcrumb line */}
             <div className="breadcrumb-line">
-              <Link href="/" className="breadcrumb-link">Brandlift</Link>
+              <Link href="/" className="breadcrumb-link">Voyita</Link>
               <span className="breadcrumb-sep">/</span>
               <Link href="/blog" className="breadcrumb-link">Blog</Link>
               <span className="breadcrumb-sep">/</span>
-              <span className="breadcrumb-link">{post.category || 'GEO'}</span>
+              <span className="breadcrumb-link">{post.category || 'OPERATIONS'}</span>
               <span className="breadcrumb-sep">/</span>
               <span className="breadcrumb-active">{post.title.toUpperCase()}</span>
             </div>
@@ -160,7 +160,7 @@ export default async function PostPage({ params }) {
                       </div>
                     </div>
                     <p className="author-hover-description">
-                      {post.authorBio || "Strategic director maps growth programs. Constructing advanced search and conversion operations that predictably scale B2B company pipelines."}
+                      {post.authorBio || "Tour coordinator and travel management expert. Helping group operators automate setup, registrations, payments, and ground operations."}
                     </p>
                     <div className="author-hover-footer">
                       <Link href="/blog" className="author-hover-bio-btn">
@@ -369,7 +369,7 @@ export default async function PostPage({ params }) {
                     </div>
                   </div>
                   <p className="author-card-bio">
-                    {post.authorBio || "Strategic director maps growth programs. Constructing advanced search and conversion operations that predictably scale B2B company pipelines."}
+                    {post.authorBio || "Tour coordinator and travel management expert. Helping group operators automate setup, registrations, payments, and ground operations."}
                   </p>
                 </div>
               </div>
@@ -397,151 +397,13 @@ export default async function PostPage({ params }) {
                   </p>
                 )}
 
-                {/* HIGH-FIDELITY MOCK GRAPHIC DEMONSTRATIONS MATCHING WELLOWS.COM */}
-                {/* These enrich the editorial view with structural, responsive components */}
-                
-                <h2 id="two-layer-monitoring-framework">Citation + Mention: The Two-Layer Framework</h2>
-                
-                <p>
-                  Any brand mention in an AI response is simply the visible result of an internal retrieval process. By tracking explicit citation sources alongside implicit brand mentions, digital marketers gain a structural roadmap to consistently control visibility and grow their organic search footprints.
-                </p>
-
-                {/* Definition Box blocks */}
-                <div className="wsc-block wsc-definition">
-                  <span className="wsc-label wsc-label--light">Definition</span>
-                  <h4 className="wsc-definition__term">Mentions</h4>
-                  <p className="wsc-definition__body">
-                    A mention occurs when an LLM directly names a brand in the body of its response. It is the final visual metric, optimal for brand sentiment audits and general competitive share-of-voice reporting.
-                  </p>
-                </div>
-
-                <div className="wsc-block wsc-definition">
-                  <span className="wsc-label wsc-label--light">Definition</span>
-                  <h4 className="wsc-definition__term">Citations</h4>
-                  <p className="wsc-definition__body">
-                    A citation is the explicit source URL or reference link that the search system accesses to verify facts and build responses. Explicit citations point directly to your brand domain, while implicit citations leverage third-party authority sites where your brand already holds organic placements.
-                  </p>
-                </div>
-
-                {/* Callout Quote */}
-                <div className="highlighter-box shadow-sm">
-                  "Watching standard brand mentions is essentially tracking static outcomes. If you want a lever that your digital marketing team can actively optimize, build content for, and outreach toward, focus your attention on dynamic citations." — Strategic Marketing Audit
-                </div>
-
-                {/* Statistics Box */}
-                <div className="wsc-block wsc-stat">
-                  <span className="wsc-stat__number">847 / 230</span>
-                  <div className="wsc-stat-content">
-                    <p className="wsc-stat__label">Explicit vs. Implicit citation distribution tracked across GEO playbooks</p>
-                    <p className="wsc-stat__body">
-                      Audits show a definitive 78.64% explicit vs. 21.36% implicit split. Rather than combining this data, keeping the layers distinct maps cleanly to independent agency workflows: explicit values define content authority, while implicit assets measure digital PR coverage.
-                    </p>
-                    <small className="wsc-stat__source">Source: Wellows citation tracking database and engine audit logs</small>
-                  </div>
-                </div>
-
-                <h2 id="comparative-analysis">Benchmarking Visibility Platforms</h2>
-                <p>
-                  To choose the optimal stack for client optimization, examine the scoring methodologies, citation monitoring APIs, and agency-level features across platforms today:
-                </p>
-
-                {/* Custom Comparisons Table */}
-                <div className="comparision-table-wrap">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Platform</th>
-                        <th>Scoring Methodology</th>
-                        <th>Citation Tracking</th>
-                        <th>Agency Workflows</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><strong>Wellows Style</strong></td>
-                        <td>Dual-layer citation & mention share</td>
-                        <td>Yes — explicit and implicit links monitored separately</td>
-                        <td>Multi-client dashboards, activity audits, real-time alerts</td>
-                      </tr>
-                      <tr>
-                        <td>Profound</td>
-                        <td>Static category mention ratio</td>
-                        <td>Isolated list panel; not factored in primary score</td>
-                        <td>Enterprise plans with manual strategy consultants</td>
-                      </tr>
-                      <tr>
-                        <td>Peec AI</td>
-                        <td>Simple SOV mention counts</td>
-                        <td>Basic reference list limits</td>
-                        <td>Co-marketing programs and basic partner lists</td>
-                      </tr>
-                      <tr>
-                        <td>Otterly</td>
-                        <td>Brand mention counts</td>
-                        <td>Very limited indexing</td>
-                        <td>Undocumented internal developer access</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <h2 id="checklist-optimization">Daily Monitoring Workflows</h2>
-                <p>
-                  Deploying a sustainable routine ensures your brand intercepts growth opportunities inside AI search networks before competitors adjust:
-                </p>
-
-                {/* Interactive checklist block component */}
-                <div className="wsc-block wsc-checklist">
-                  <span className="wsc-label wsc-label--blue">
-                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#fff" strokeWidth="2">
-                      <rect x="2" y="2" width="12" height="12" rx="2" />
-                      <polyline points="5,8 7,10 11,6" />
-                    </svg>
-                    Daily Monitoring Checklist
-                  </span>
-                  <ul>
-                    <li>
-                      <span className="wsc-checklist-indicator"></span>
-                      <span>Flag daily movements in global Citation and brand Visibility scores.</span>
-                    </li>
-                    <li>
-                      <span className="wsc-checklist-indicator"></span>
-                      <span>Audit percentage shifts across Explicit (Content) and Implicit opportunities.</span>
-                    </li>
-                    <li>
-                      <span className="wsc-checklist-indicator"></span>
-                      <span>Track exact keyword rankings across Answer Engines (ChatGPT, Gemini, Perplexity).</span>
-                    </li>
-                    <li>
-                      <span className="wsc-checklist-indicator"></span>
-                      <span>Generate quick summaries of key day-over-day changes to present on standing calls.</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Mistake vs. Fix Card Grids */}
-                <div className="wsc-mf-grid">
-                  <div className="wsc-mf-card wsc-mf-card--mistake">
-                    <p className="wsc-mf-label">✕ What most agencies do today</p>
-                    <p className="wsc-mf-body">
-                      Present a single static, mention-based score from an isolated report, leaving teams unable to provide actionable explanations for weekly volatility.
-                    </p>
-                  </div>
-                  <div className="wsc-mf-card wsc-mf-card--fix">
-                    <p className="wsc-mf-label">✓ What the client report should include instead</p>
-                    <p className="wsc-mf-body">
-                      A clear dual breakdown: explicit URLs earned, implicit references secured, and a high-impact list of search visibility gaps to capture next period.
-                    </p>
-                  </div>
-                </div>
-
                 {/* Bottom FAQs accordion */}
                 <FaqSection faqs={post.faqs} />
 
                 {/* Bottom navigation line */}
                 <div className="playbook-bottom-nav">
                   <Link href="/blog" className="back-link-bottom">
-                    ← Back to Library Catalog
+                    ← Back to Growth Library
                   </Link>
                   <a
                     href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}`}
@@ -549,10 +411,10 @@ export default async function PostPage({ params }) {
                     rel="noopener noreferrer"
                     className="share-link-bottom"
                   >
-                    Share Strategy Playbook <span className="arrow-icon">↗</span>
+                    Share Article <span className="arrow-icon">↗</span>
                   </a>
                 </div>
-              </div>
+              </div>      </div>
 
             </div>
 
