@@ -36,6 +36,24 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: 'twitter',
+      title: 'Twitter / X URL',
+      type: 'url',
+      validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
+    }),
+    defineField({
+      name: 'linkedin',
+      title: 'LinkedIn URL',
+      type: 'url',
+      validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
+    }),
+    defineField({
+      name: 'website',
+      title: 'Website / Portfolio URL',
+      type: 'url',
+      validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }),
+    }),
   ],
   preview: {
     select: { title: 'name', subtitle: 'role', media: 'image' },
