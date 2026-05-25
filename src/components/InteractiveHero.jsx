@@ -63,7 +63,7 @@ export default function InteractiveHero() {
   }, []);
 
   return (
-    <section className="voyita-section" style={{ background: 'linear-gradient(180deg, var(--voyita-navy-dark) 0%, var(--voyita-navy) 100%)', borderBottom: '1px solid var(--voyita-border)', paddingTop: '32px', paddingBottom: '32px' }}>
+    <section className="voyita-section" style={{ background: 'linear-gradient(180deg, var(--voyita-navy-dark) 0%, var(--voyita-navy) 100%)', borderBottom: '1px solid var(--voyita-border)', paddingTop: '80px', paddingBottom: '64px' }}>
       <div className="voyita-container">
         <div className="voyita-hero-grid">
           
