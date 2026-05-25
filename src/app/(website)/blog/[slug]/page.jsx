@@ -90,12 +90,13 @@ export default async function PostPage({ params }) {
     ? urlFor(post.coverImage).width(1400).height(650).fit('crop').url()
     : `https://picsum.photos/seed/${params.slug}/1400/650`;
 
-  // Calculate Author details with secure fallback defaults
-  const authorName = post.authorName || 'Voyita Team';
-  const authorRole = 'Group Tour Expert';
-  const authorImageSrc = post.authorImage?.asset
-    ? urlFor(post.authorImage).width(120).height(120).fit('crop').url()
+  // Calculate Author details from reusable author profile with secure fallback defaults
+  const authorName = post.author?.name || 'Voyita Team';
+  const authorRole = post.author?.role || 'Group Tour Expert';
+  const authorImageSrc = post.author?.image?.asset
+    ? urlFor(post.author.image).width(120).height(120).fit('crop').url()
     : `https://picsum.photos/seed/${encodeURIComponent(authorName)}/120/120`;
+  const authorBio = post.author?.bio || "Tour coordinator and travel management expert. Helping group operators automate setup, registrations, payments, and ground operations.";
 
   const shareUrl = `https://voyita.com/blog/${params.slug}`;
 
@@ -160,7 +161,7 @@ export default async function PostPage({ params }) {
                       </div>
                     </div>
                     <p className="author-hover-description">
-                      {post.authorBio || "Tour coordinator and travel management expert. Helping group operators automate setup, registrations, payments, and ground operations."}
+                      {authorBio}
                     </p>
                     <div className="author-hover-footer">
                       <Link href="/blog" className="author-hover-bio-btn">
@@ -369,7 +370,7 @@ export default async function PostPage({ params }) {
                     </div>
                   </div>
                   <p className="author-card-bio">
-                    {post.authorBio || "Tour coordinator and travel management expert. Helping group operators automate setup, registrations, payments, and ground operations."}
+                    {authorBio}
                   </p>
                 </div>
               </div>

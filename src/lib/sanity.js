@@ -48,7 +48,6 @@ export async function getPostBySlug(slug) {
     `*[_type == "post" && slug.current == $slug][0] {
       _id, title, slug, excerpt, category, readTime, publishedAt, body,
       coverImage { asset, alt },
-      authorName, authorBio, authorImage { asset, alt },
       author->{ name, bio, role, image { asset, alt } },
       faqs
     }`,

@@ -18,6 +18,7 @@ export default defineConfig({
           .items([
             S.listItem().title('Blog Posts').child(S.documentTypeList('post').title('Blog Posts')),
             S.listItem().title('Categories').child(S.documentTypeList('category').title('Categories')),
+            S.listItem().title('Authors').child(S.documentTypeList('author').title('Authors')),
           ]),
     }),
     visionTool(),

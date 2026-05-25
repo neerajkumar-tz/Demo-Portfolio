@@ -143,32 +143,8 @@ export default defineType({
       name: 'author',
       title: 'Author',
       type: 'reference',
-      description: 'Choose a reusable author profile (Name, Role, Bio, Image). This overrides manual overrides below.',
+      description: 'Choose a reusable author profile (Name, Role, Bio, Image).',
       to: [{ type: 'author' }],
-    }),
-    defineField({
-      name: 'authorName',
-      title: 'Author Name (Manual Override)',
-      type: 'string',
-    }),
-    defineField({
-      name: 'authorBio',
-      title: 'Author Bio',
-      type: 'text',
-      rows: 3,
-    }),
-    defineField({
-      name: 'authorImage',
-      title: 'Author Image',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alt Text',
-        },
-      ],
     }),
     defineField({
       name: 'faqs',
